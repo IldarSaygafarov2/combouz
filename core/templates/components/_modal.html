@@ -1,0 +1,88 @@
+{% load static %}
+
+<div class="modal">
+    <div class="modal__content">
+        <div class="modal__tabs">
+            <a class="modal__tabs-link active" href="#!">Войти </a
+            ><a class="modal__tabs-link" href="#!">Регистрация</a>
+        </div>
+        <div class="modal__items">
+            <div class="modal__items-elem modal__form-signin active">
+                <form class="modal__form" action="" method="POST">
+                    <div class="modal__form-item">
+                        <p class="modal__form-name">Номер телефона или почта</p>
+                        <input class="modal__form-input" placeholder="Your email" autocomplete="email"
+                               name="user-email"/>
+                    </div>
+                    <div class="modal__form-item">
+                        <p class="modal__form-name">Пароль</p>
+                        <div class="modal__form-sep">
+                            <input class="modal__form-input" type="password" placeholder="Password"
+                                   autocomplete="new-password" name="user-password"/>
+                            <div class="modal__form-hide">
+                                <img src="{% static 'images/icons/eye-open.svg' %}" alt="hide/show password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="modal__form-lost" href="#!">Забыли пароль?</a
+                    >
+                    <button class="modal__form-btn darkBlueHover" type="submit" disabled="disabled">
+                        Войти
+                    </button>
+                </form>
+            </div>
+            <div class="modal__items-elem modal__form-register">
+                <form class="modal__form" action="" method="POST">
+                    <div class="modal__form-item">
+                        <p class="modal__form-name">Почта</p>
+                        <input class="modal__form-input" type="email" placeholder="Your email" autocomplete="email"
+                               name="user-email"/>
+                    </div>
+                    <div class="modal__form-item">
+                        <p class="modal__form-name">Номер телефона</p>
+                        <input
+                                class="modal__form-input"
+                                type="number"
+                                placeholder="Your phone number"
+                                name="user-phone"
+                        />
+                    </div>
+                    <div class="modal__form-item">
+                        <p class="modal__form-name">Пароль</p>
+                        <div class="modal__form-sep">
+                            <input class="modal__form-input modal__form-password" type="password" placeholder="Password"
+                                   autocomplete="new-password"
+                                   name="user-password"
+                            />
+                            <div class="modal__form-hide">
+                                <img src="{% static 'images/icons/eye-open.svg' %}" alt="hide/show password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal__form-item">
+                        <p class="modal__form-name">Повторите пароль</p>
+                        <div class="modal__form-sep">
+                            <input class="modal__form-input modal__form-password-rep" type="password"
+                                   placeholder="Repeat password" autocomplete="new-password"
+                                   name="user-password-repeat"/>
+                            <div class="modal__form-hide">
+                                <img src="{% static 'images/icons/eye-open.svg' %}" alt="hide/show password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="modal__form-btn modal__form-reg-btn darkBlueHover" type="submit" disabled="disabled">
+                        Регистрация
+                    </button>
+                    <a class="modal__form-login" href="#!">
+                        <img src="{% static 'images/icons/google-logo.svg' %}" alt="google logo"/>
+                        <span>Войти через Google </span>
+                    </a>
+                    <a class="modal__form-login" href="#!">
+                        <img src="{% static 'images/icons/facebook-logo.svg' %}" alt="google logo"/>
+                        <span>Войти через Facebook</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
