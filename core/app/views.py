@@ -19,3 +19,7 @@ def categories_view(request):
 
 def product_view(request, product_slug):
     return render(request, "app/product.html")
+
+
+def basket_view(request):
+    return render(request, "app/basket.html")

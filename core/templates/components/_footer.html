@@ -7,7 +7,7 @@
         <ul class="footer__list">
           <li class="footer__list-item">
             <img
-              src="/assets/images/icons/call-dark.svg"
+              src="{% static 'images/icons/call-dark.svg' %}"
               alt="combo.uz phone numbers"
             /><strong>Телефоны</strong>
           </li>
@@ -21,7 +21,7 @@
         <ul class="footer__list">
           <li class="footer__list-item">
             <img
-              src="/assets/images/icons/message-dark.svg"
+              src="{% static 'images/icons/message-dark.svg' %}"
               alt="combo.uz mailbox"
             /><strong>Почта</strong>
           </li>
@@ -35,7 +35,7 @@
         <ul class="footer__list">
           <li class="footer__list-item">
             <img
-              src="/assets/images/icons/location.svg"
+              src="{% static 'images/icons/location.svg' %}"
               alt="combo.uz location"
             /><strong>Адрес</strong>
           </li>
@@ -52,7 +52,7 @@
         <ul class="footer__list">
           <li class="footer__list-item">
             <img
-              src="/assets/images/icons/clock.svg"
+              src="{% static 'images/icons/clock.svg' %}"
               alt="combo.uz work times"
             /><strong>Режим работы</strong>
           </li>
@@ -67,12 +67,12 @@
           <p class="footer__middle-excerpt">Ссылки</p>
           <ul class="footer__middle-list">
             <li class="footer__middle-list-item">
-              <a class="footer__middle-link" href="/about-company.html"
+              <a class="footer__middle-link" href="{% url 'about' %}"
                 >О компании</a
               >
             </li>
             <li class="footer__middle-list-item">
-              <a class="footer__middle-link" href="/contacts.html">Контакты</a>
+              <a class="footer__middle-link" href="{% url 'contacts' %}">Контакты</a>
             </li>
           </ul>
         </div>
