@@ -1,6 +1,12 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
-from .models import Category, ProductOption, Product, ProductImage
+from .models import Category, ProductOption, Product, ProductImage, CustomUser
+
+
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    pass
 
 
 @admin.register(Category)

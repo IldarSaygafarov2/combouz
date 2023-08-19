@@ -3,8 +3,8 @@
 <div class="modal">
     <div class="modal__content">
         <div class="modal__tabs">
-            <a class="modal__tabs-link active" href="#!">Войти </a
-            ><a class="modal__tabs-link" href="#!">Регистрация</a>
+            <a class="modal__tabs-link active" href="#!">Войти </a>
+            <a class="modal__tabs-link" href="#!">Регистрация</a>
         </div>
         <div class="modal__items">
             <div class="modal__items-elem modal__form-signin active">
@@ -35,25 +35,16 @@
                 <form class="modal__form" action="" method="POST">
                     <div class="modal__form-item">
                         <p class="modal__form-name">Почта</p>
-                        <input class="modal__form-input" type="email" placeholder="Your email" autocomplete="email"
-                               name="user-email"/>
+                        {{ form.email }}
                     </div>
                     <div class="modal__form-item">
                         <p class="modal__form-name">Номер телефона</p>
-                        <input
-                                class="modal__form-input"
-                                type="number"
-                                placeholder="Your phone number"
-                                name="user-phone"
-                        />
+                        {{ form.phone_number }}
                     </div>
                     <div class="modal__form-item">
                         <p class="modal__form-name">Пароль</p>
                         <div class="modal__form-sep">
-                            <input class="modal__form-input modal__form-password" type="password" placeholder="Password"
-                                   autocomplete="new-password"
-                                   name="user-password"
-                            />
+                            {{ form.password1 }}
                             <div class="modal__form-hide">
                                 <img src="{% static 'images/icons/eye-open.svg' %}" alt="hide/show password"/>
                             </div>
@@ -62,9 +53,7 @@
                     <div class="modal__form-item">
                         <p class="modal__form-name">Повторите пароль</p>
                         <div class="modal__form-sep">
-                            <input class="modal__form-input modal__form-password-rep" type="password"
-                                   placeholder="Repeat password" autocomplete="new-password"
-                                   name="user-password-repeat"/>
+                            {{ form.password2 }}
                             <div class="modal__form-hide">
                                 <img src="{% static 'images/icons/eye-open.svg' %}" alt="hide/show password"/>
                             </div>

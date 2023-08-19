@@ -1,8 +1,17 @@
 from django.shortcuts import render, HttpResponse
+from .forms import CustomUserCreationForm, CustomUserAuthenticationForm
 
 
 def home_view(request):
-    return render(request, "app/index.html")
+    if request.method == "POST":
+        form = CustomUserCreationForm()
+    else:
+        form = CustomUserCreationForm()
+
+    context = {
+        "form": form
+    }
+    return render(request, "app/index.html", context)
 
 
 def about_view(request):
@@ -14,6 +23,10 @@ def contacts_view(request):
 
 
 def categories_view(request):
+    return render(request, "app/categories.html")
+
+
+def category_detail_view(request, slug):
     return render(request, "app/categories.html")
 
 

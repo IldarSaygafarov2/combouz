@@ -1,4 +1,6 @@
-{% load static %}
+{% load static custom_tags %}
+
+{% get_categories as categories %}
 
 <div class="header-top">
     <div class="container">
@@ -41,24 +43,12 @@
             </a>
             <div class="header__items">
                 <ul class="header__list">
+                    {% for category in categories %}
                     <li class="header__list-item">
-                        <a class="header__link" href="/goods-page.html">На пластиковые окна</a>
+                        <a class="header__link" href="{{ category.get_absolute_url }}">{{ category }}</a>
                     </li>
-                    <li class="header__list-item">
-                        <a class="header__link" href="/goods-page.html">Руллонные</a>
-                    </li>
-                    <li class="header__list-item">
-                        <a class="header__link" href="/goods-page.html">Вертикальные</a>
-                    </li>
-                    <li class="header__list-item">
-                        <a class="header__link" href="/goods-page.html">День-Ночь</a>
-                    </li>
-                    <li class="header__list-item">
-                        <a class="header__link" href="/goods-page.html">Плиссе</a>
-                    </li>
-                    <li class="header__list-item">
-                        <a class="header__link" href="/goods-page.html">Шторы</a>
-                    </li>
+                    {% endfor %}
+
                     <li class="header__list-item">
                         <a class="header__link header__link-sp" href="#!">Авторизация / Регистрация</a>
                     </li>

@@ -1,9 +1,18 @@
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
+
+
+class CustomUser(AbstractUser):
+    phone_number = models.CharField(verbose_name="Номер телефона", max_length=15)
 
 
 class Category(models.Model):
     name = models.CharField(verbose_name="Категория", max_length=155)
     slug = models.SlugField(verbose_name="Слаг", default="")
+
+    def get_absolute_url(self):
+        return reverse("category_detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name
@@ -29,7 +38,7 @@ class Product(models.Model):
     ]
 
     CONTROL_TYPE_CHOICES = [
-        ('', 'Ручной'),
+        ('Ручной', 'Ручной'),
         ('С электроприводом', 'С электроприводом'),
     ]
 
