@@ -14,6 +14,10 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("category_detail", kwargs={"slug": self.slug})
 
+    def get_category_products_count(self):
+        products = self.categories.all()
+        return products.count()
+
     def __str__(self):
         return self.name
 
@@ -56,6 +60,7 @@ class Product(models.Model):
     dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
     price = models.CharField(verbose_name="Цена", max_length=100)
     description = models.TextField(verbose_name="Описание продукта")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
 
     def __str__(self):
         return self.name
