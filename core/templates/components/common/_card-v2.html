@@ -3,16 +3,16 @@
 
 <div class="cassette-combo__item">
     <div class="cassette-combo__content">
-        <a class="cassette-combo__img" href="/single-item.html">
-            <img src="{% static 'images/main-page/cassette-curtains01.png' %}" alt="Combo.uz cassette combo curtains"/>
+        <a class="cassette-combo__img" href="{{ product.get_absolute_url }}">
+            <img src="{{ product.get_first_photo }}" alt="Combo.uz {{ product.name }}"/>
         </a>
         <div class="cassette-combo__text">
-            <h3 class="cassette-combo__name">New O V-13</h3>
+            <h3 class="cassette-combo__name">{{ product.name }}</h3>
             <ul class="cassette-combo__type">
-                <li class="cassette-combo__elem">Тип ткани: Полиэстер</li>
-                <li class="cassette-combo__elem">Свойство: Гладкий</li>
-                <li class="cassette-combo__elem">Затемнение: 50%</li>
-                <li class="cassette-combo__elem">Цена: 80 500 сум за 1 м2</li>
+                <li class="cassette-combo__elem">Тип ткани: {{ product.fabric_type }}</li>
+                <li class="cassette-combo__elem">Свойство: {{ product.property }}</li>
+                <li class="cassette-combo__elem">Затемнение: {{ product.dimming }}%</li>
+                <li class="cassette-combo__elem">Цена: {{ product.price }} сум за 1 м2</li>
             </ul>
         </div>
     </div>

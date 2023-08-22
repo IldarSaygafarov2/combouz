@@ -2,29 +2,22 @@
 
 <div class="goods-filters__right">
     <div class="goods-filters__sort">
-        <a class="goods-filters__sort-link active" href="#!">
+        <a class="goods-filters__sort-link active" href="#">
             <span>По цене</span>
             <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
         </a>
-        <a class="goods-filters__sort-link" href="#!"><span>Новинки</span>
+        <a class="goods-filters__sort-link" href="#"><span>Новинки</span>
             <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
         </a>
-        <a class="goods-filters__sort-link" href="#!"><span>По наименованию</span>
+        <a class="goods-filters__sort-link" href="#"><span>По наименованию</span>
             <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
         </a>
     </div>
     <div class="goods-filters__cards">
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
-        {% include 'components/common/_card-v2.html' %}
+        {% for product in products %}
+            {% include 'components/common/_card-v2.html' %}
+            {% empty %}
+            <h1>No products</h1>
+        {% endfor %}
     </div>
 </div>

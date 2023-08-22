@@ -1,21 +1,39 @@
-from django.shortcuts import render, HttpResponse
-from .forms import CustomUserCreationForm, CustomUserAuthenticationForm
+from django.shortcuts import render, redirect
+
+from .forms import CustomUserCreationForm
+from .models import Product, Category, ProjectsGallery, Client, CustomUser
 
 
 def home_view(request):
+    print('asd')
     if request.method == "POST":
-        form = CustomUserCreationForm()
+        form = CustomUserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            # print(obj)
+        else:
+            print(form.errors)
     else:
         form = CustomUserCreationForm()
 
+    gallery_projects = ProjectsGallery.objects.all()
+
     context = {
-        "form": form
+        "form": form,
+        "gallery_projects": gallery_projects
     }
     return render(request, "app/index.html", context)
 
 
 def about_view(request):
-    return render(request, "app/about.html")
+    gallery_projects = ProjectsGallery.objects.all()
+    clients = Client.objects.all()
+
+    context = {
+        "gallery_projects": gallery_projects,
+        "clients": clients
+    }
+    return render(request, "app/about.html", context)
 
 
 def contacts_view(request):
@@ -27,11 +45,20 @@ def categories_view(request):
 
 
 def category_detail_view(request, slug):
-    return render(request, "app/categories.html")
+    category = Category.objects.get(slug=slug)
+    category_products = Product.objects.filter(category=category)
+    context = {
+        "products": category_products
+    }
+    return render(request, "app/categories.html", context)
 
 
 def product_view(request, product_slug):
-    return render(request, "app/product.html")
+    product = Product.objects.get(slug=product_slug)
+    context = {
+        "product": product
+    }
+    return render(request, "app/product.html", context)
 
 
 def basket_view(request):

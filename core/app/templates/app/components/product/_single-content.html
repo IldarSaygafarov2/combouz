@@ -1,0 +1,19 @@
+<div class="single__content">
+    <ul class="single__content-features">
+        <li class="single__content-elem">Страна производитель: {{ product.manufacturer_country }}</li>
+        <li class="single__content-elem">Тип ткани: {{ product.fabric_type }}</li>
+        <li class="single__content-elem">Свойство: {{ product.property }}</li>
+        <li class="single__content-elem">Затемнение: {{ product.dimming }}%</li>
+    </ul>
+    <h4 class="single__content-price">Цена: {{ produt.price }} сум за 1 м2</h4>
+    <p class="single__content-info">{{ product.description }}</p>
+    <h3 class="single__content-characters">Характеристики</h3>
+
+    {% for option in product.product_options.all %}
+    <div class="single__content-item">
+        <h4 class="single__content-title">{{ option.option_main }}</h4>
+        <p class="single__content-descr">{{ option.option_additional }}</p>
+    </div>
+    {% endfor %}
+
+</div>

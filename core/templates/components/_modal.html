@@ -33,6 +33,7 @@
             </div>
             <div class="modal__items-elem modal__form-register">
                 <form class="modal__form" action="" method="POST">
+                    {% csrf_token %}
                     <div class="modal__form-item">
                         <p class="modal__form-name">Почта</p>
                         {{ form.email }}
@@ -59,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="modal__form-btn modal__form-reg-btn darkBlueHover" type="submit" disabled="disabled">
+                    <button class="modal__form-btn modal__form-reg-btn darkBlueHover" type="submit">
                         Регистрация
                     </button>
                     <a class="modal__form-login" href="#!">

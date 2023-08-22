@@ -1,6 +1,8 @@
 from django.db import models
+from django.templatetags.static import static
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
+
 
 
 class CustomUser(AbstractUser):
@@ -28,7 +30,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     SIZE_CHOICES = [
-        (f'{i}', f'{i} мм')
+        (f'{i} мм', f'{i} мм')
         for i in range(1, 30)
     ]
 
@@ -61,6 +63,22 @@ class Product(models.Model):
     price = models.CharField(verbose_name="Цена", max_length=100)
     description = models.TextField(verbose_name="Описание продукта")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
+    slug = models.SlugField(default="")
+
+    def get_absolute_url(self):
+        return reverse("product_detail", kwargs={"product_slug": self.slug})
+
+    def get_first_photo(self):
+        images = self.images.all()
+        if not images:
+            return static("images/soon.png")
+        return images[0].photo.url
+
+    def get_choices_range(self):
+        return [choice[0] for choice in self.SIZE_CHOICES]
+
+    def get_quantity_range(self):
+        return [choice[0] for choice in self.QUANTITY_CHOICES]
 
     def __str__(self):
         return self.name
@@ -85,3 +103,28 @@ class ProductImage(models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     photo = models.ImageField(verbose_name="Фото", upload_to=make_folder_path)
+
+
+class ProjectsGallery(models.Model):
+    title = models.CharField(verbose_name="Заголовок проекта", max_length=255)
+    subtitle = models.CharField(verbose_name="Подзаголовок проекта", max_length=255)
+    photo = models.ImageField(verbose_name="Фото проекта", upload_to="gallery/projects/", default="")
+
+    def __str__(self):
+        return f"{self.title}: {self.subtitle}"
+
+    class Meta:
+        verbose_name = "Проект"
+        verbose_name_plural = "Галерея проектов"
+
+
+class Client(models.Model):
+    name = models.CharField(verbose_name="Название клиента", max_length=255)
+    photo = models.ImageField(verbose_name="Логотип клиента", upload_to="clients/")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Клиент"
+        verbose_name_plural = "Клиенты"

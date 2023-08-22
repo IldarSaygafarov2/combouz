@@ -1,90 +1,45 @@
 {% load static %}
 
-        <section class="gallery-projects">
-            <div class="container">
-                <div class="gallery-projects__items">
-                    <div class="gallery-projects__left">
-                        <h2 class="gallery-projects__title">Галерея проектов</h2>
-                        <p class="gallery-projects__descr">Здесь вы можете посмотреть проекты, которые выполнены с
-                            нашими жалюзями</p>
-                    </div>
-                    <div class="gallery-projects__right">
-                        <div class="gallery-projects__slider">
-                            <div class="swiper-wrapper gallery-projects__wrapper">
-                                <div class="swiper-slide gallery-projects__slide"><img
-                                        src="{% static 'images/main-page/gallery-projects01.png' %}"
-                                        alt="Combo.uz gallery projects">
-                                    <div class="gallery-projects__text">
-                                        <p class="gallery-projects__excerpt">01 - Bed Room</p>
-                                        <h4 class="gallery-projects__name">Inner Peace</h4>
-                                        <div class="gallery-projects__alternate darkBlueHover"><img
-                                                src="{% static 'images/icons/right-arrow.svg' %}" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide gallery-projects__slide"><img
-                                        src="{% static 'images/main-page/gallery-projects02.png' %}"
-                                        alt="Combo.uz gallery projects">
-                                    <div class="gallery-projects__text">
-                                        <p class="gallery-projects__excerpt">02 - Bed Room</p>
-                                        <h4 class="gallery-projects__name">Inner Peace</h4>
-                                        <div class="gallery-projects__alternate darkBlueHover"><img
-                                                src="{% static 'images/icons/right-arrow.svg' %}" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide gallery-projects__slide"><img
-                                        src="{% static 'images/main-page/gallery-projects03.png' %}"
-                                        alt="Combo.uz gallery projects">
-                                    <div class="gallery-projects__text">
-                                        <p class="gallery-projects__excerpt">03 - Bed Room</p>
-                                        <h4 class="gallery-projects__name">Inner Peace</h4>
-                                        <div class="gallery-projects__alternate darkBlueHover"><img
-                                                src="{% static 'images/icons/right-arrow.svg' %}" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide gallery-projects__slide"><img
-                                        src="{% static 'images/main-page/gallery-projects02.png' %}"
-                                        alt="Combo.uz gallery projects">
-                                    <div class="gallery-projects__text">
-                                        <p class="gallery-projects__excerpt">04 - Bed Room</p>
-                                        <h4 class="gallery-projects__name">Inner Peace</h4>
-                                        <div class="gallery-projects__alternate darkBlueHover"><img
-                                                src="{% static 'images/icons/right-arrow.svg' %}" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide gallery-projects__slide"><img
-                                        src="{% static 'images/main-page/gallery-projects03.png' %}"
-                                        alt="Combo.uz gallery projects">
-                                    <div class="gallery-projects__text">
-                                        <p class="gallery-projects__excerpt">05 - Bed Room</p>
-                                        <h4 class="gallery-projects__name">Inner Peace</h4>
-                                        <div class="gallery-projects__alternate darkBlueHover"><img
-                                                src="{% static 'images/icons/right-arrow.svg' %}" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide gallery-projects__slide"><img
-                                        src="{% static 'images/main-page/gallery-projects02.png' %}"
-                                        alt="Combo.uz gallery projects">
-                                    <div class="gallery-projects__text">
-                                        <p class="gallery-projects__excerpt">06 - Bed Room</p>
-                                        <h4 class="gallery-projects__name">Inner Peace</h4>
-                                        <div class="gallery-projects__alternate darkBlueHover"><img
-                                                src="{% static 'images/icons/right-arrow.svg' %}" alt=""></div>
-                                    </div>
+<section class="gallery-projects">
+    <div class="container">
+        <div class="gallery-projects__items">
+            <div class="gallery-projects__left">
+                <h2 class="gallery-projects__title">Галерея проектов</h2>
+                <p class="gallery-projects__descr">Здесь вы можете посмотреть проекты, которые выполнены с
+                    нашими жалюзями</p>
+            </div>
+            <div class="gallery-projects__right">
+                <div class="gallery-projects__slider">
+                    <div class="swiper-wrapper gallery-projects__wrapper">
+                        {% for project in gallery_projects %}
+                        <div class="swiper-slide gallery-projects__slide">
+                            <img src="{{ project.photo.url }}"
+                                alt="Combo.uz {{ project.title }}">
+                            <div class="gallery-projects__text">
+                                <p class="gallery-projects__excerpt">01 - {{ project.title }}</p>
+                                <h4 class="gallery-projects__name">{{ project.subtitle }}</h4>
+                                <div class="gallery-projects__alternate darkBlueHover">
+                                    <img src="{% static 'images/icons/right-arrow.svg' %}" alt="">
                                 </div>
                             </div>
-                            <div class="gallery-projects__pagination"></div>
-                            <div class="gallery-projects__next"><svg width="38" height="38" viewBox="0 0 38 38"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="icon / outlined / directions / chevron / down">
-                                        <path id="Vector" d="M14.25 28.5L23.75 19L14.25 9.5" stroke="#0F9ED8"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </g>
-                                </svg></div>
                         </div>
+                        {% endfor %}
+                    </div>
+                    <div class="gallery-projects__pagination"></div>
+                    <div class="gallery-projects__next">
+                        <svg width="38" height="38" viewBox="0 0 38 38"
+                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="icon / outlined / directions / chevron / down">
+                                <path id="Vector" d="M14.25 28.5L23.75 19L14.25 9.5" stroke="#0F9ED8"
+                                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 {##}
 {#<section class="gallery-projects">#}
 {#    <div class="container">#}

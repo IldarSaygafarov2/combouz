@@ -1,0 +1,107 @@
+{% load static %}
+
+<div class="single__good">
+    <div class="single__left">
+        <div class="single__left-images">
+            {% for img in product.images.all %}
+                <div class="single__left-item">
+                    <img src="{{ img.photo.url }}" alt="">
+                </div>
+            {% endfor %}
+        </div>
+        <div class="single__left-show" data-img="{{ product.get_first_photo }}">
+            <div class="single__left-zoom" itemprop="image"></div>
+            <img src="{{ product.get_first_photo }}" alt=""></div>
+    </div>
+
+    <form class="single__right">
+        <h2 class="single__right-title">{{ product.name }}</h2>
+        <strong class="single__right-feature size">Размер</strong>
+        <div class="single__right-sep size">
+            <div class="single__right-chose">
+                <div class="single__right-hint-abs"><p>Менее 1 кв.м, считается как 1 кв.м</p></div>
+                <span class="single__right-info">ширина</span>
+
+                <select class="single__right-select" name="item-width">
+                    <option value="{{ product.get_choices_range.0 }}" selected="selected">
+                        {{ product.get_choices_range.0 }}
+                    </option>
+                    {% for choice in product.get_choices_range %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="single__right-chose">
+                <div class="single__right-hint-abs"><p>Менее 1 кв.м, считается как 1 кв.м</p></div>
+                <span class="single__right-info">Длина</span>
+                <select class="single__right-select" name="item-length">
+                    <option value="{{ product.get_choices_range.0 }}" selected="selected">
+                        {{ product.get_choices_range.0 }}
+                    </option>
+                    {% for choice in product.get_choices_range %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <strong class="single__right-feature control">Управление</strong>
+        <div class="single__right-sep control">
+            <label class="single__right-label">
+                <input type="radio" value="left" name="item-control">
+                <span class="single__right-check"></span>
+                <span class="single__right-info">Слева</span>
+            </label>
+            <label class="single__right-label">
+                <input type="radio" value="right" name="item-control">
+                <span class="single__right-check"></span>
+                <span class="single__right-info">Справа</span>
+            </label>
+        </div>
+        <strong class="single__right-feature count">Кол-во</strong>
+        <div class="single__right-sep count">
+            <select class="single__right-select" name="item-count">
+                {% for item in product.get_quantity_range %}
+                    <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+            <span class="single__right-info">штук</span>
+
+        </div>
+        <div class="single__right-flex">
+            <div class="single__right-flex-left">
+                <strong class="single__right-feature type-cornise">Тип карниза</strong>
+                <div class="single__right-sep">
+                    <label class="single__right-label">
+                        <input type="radio" value="aluminium" name="item-cornice-type">
+                        <span class="single__right-check"></span>
+                        <span class="single__right-info">Алюминевый</span>
+                    </label>
+                    <label class="single__right-label">
+                        <input type="radio" value="plastic" name="item-cornice-type">
+                        <span class="single__right-check"></span>
+                        <span class="single__right-info">Пластиковый</span>
+                    </label>
+                </div>
+                <strong class="single__right-feature type-control">Тип управления</strong>
+                <div class="single__right-sep">
+                    <label class="single__right-label">
+                        <input type="radio" value="manual" name="item-control-type">
+                        <span class="single__right-check"></span>
+                        <span class="single__right-info">Ручной</span>
+                    </label>
+                    <label class="single__right-label">
+                        <input type="radio" value="electro" name="item-control-type">
+                        <span class="single__right-check"></span>
+                        <span class="single__right-info">С электроприводом</span>
+                    </label>
+                </div>
+            </div>
+            <button class="single__right-btn darkBlueHover" type="submit">
+                <strong>В корзину</strong>
+                <span class="single__right-icon">
+                                <img src="{% static 'images/icons/work-light.svg' %}" alt="">
+                            </span>
+            </button>
+        </div>
+    </form>
+</div>
