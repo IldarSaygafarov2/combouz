@@ -1,0 +1,20 @@
+{% load static custom_tags %}
+
+{% get_unique_elements 'color' as elements %}
+
+
+<h4 class="goods-filters__accordion-name">
+    <span>Цвет</span>
+    <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
+</h4>
+<div class="goods-filters__accordion-content">
+    <ul class="goods-filters__accordion-list">
+        {% for color in elements %}
+        <li class="goods-filters__accordion-elem">
+            <a class="goods-filters__accordion-link" href="?sort=color={{ color }}">
+                <span>{{ color }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

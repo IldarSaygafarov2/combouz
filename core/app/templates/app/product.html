@@ -51,15 +51,14 @@
             <section class="single-comments">
                 <h3 class="single-comments__title">Комментарии</h3>
                 <div class="single-comments__content">
-                    <form class="single-comments__form" action="">
+                    <form class="single-comments__form" action="{% url 'add_comment' product.slug %}" method="post">
+                        {% csrf_token %}
                         <div class="single-comments__user">
                             <img class="single-comments__avatar" src="/assets/images/single-item/user.png"
                                  alt="user-avatar">
                             <strong class="single-comments__fullname">Игорь Зубарев</strong>
                         </div>
-                        <textarea class="single-comments__textarea" name="user-comment"
-                                  placeholder="Оставьте комментарий">
-
+                        {{ form.body }}
                         </textarea>
                         <button class="single-comments__btn darkBlueHover">Отправить</button>
                     </form>

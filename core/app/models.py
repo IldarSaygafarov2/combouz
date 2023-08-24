@@ -1,12 +1,22 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.templatetags.static import static
 from django.urls import reverse
-from django.contrib.auth.models import AbstractUser
-
+from .managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
+    username = None
     phone_number = models.CharField(verbose_name="Номер телефона", max_length=15)
+    email = models.EmailField(unique=True, default="")
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    class Meta:
+        ordering = ["email"]
 
 
 class Category(models.Model):
@@ -64,6 +74,8 @@ class Product(models.Model):
     description = models.TextField(verbose_name="Описание продукта")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
     slug = models.SlugField(default="")
+    created_at = models.DateTimeField(verbose_name="Дата добавления", auto_now_add=True, null=True)
+    color = models.CharField(verbose_name="Цвет", max_length=100, default="")
 
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})
@@ -128,3 +140,12 @@ class Client(models.Model):
     class Meta:
         verbose_name = "Клиент"
         verbose_name_plural = "Клиенты"
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="comments")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
+    body = models.TextField(verbose_name="Текст комментария")
+
+    def __str__(self):
+        return f"{self.author}: {self.product}"

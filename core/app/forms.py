@@ -1,11 +1,30 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from .models import CustomUser
+from .models import CustomUser, Comment
 
 
 class CustomUserAuthenticationForm(AuthenticationForm):
-    pass
+
+    email = forms.EmailField(required=True, label="Почта", widget=forms.EmailInput(attrs={
+        "class": "modal__form-input",
+        "placeholder": "Your email",
+        "name": "user-email",
+        "autocomplete": "email"
+    }))
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={
+        "class": "modal__form-input modal__form-password",
+        "placeholder": "password",
+        "name": "user-password",
+    }))
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['username'] = None
+
+    class Meta:
+        model = CustomUser
+        fields = ("email", "password")
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -34,3 +53,17 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ("email", "phone_number", "password1", "password2")
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["body"]
+        widgets = {
+            "body": forms.Textarea(attrs={
+                "class": "single-comments__textarea",
+                "placeholder": "Оставьте комментарий",
+                "rows": "",
+                "cols": ""
+            })
+        }

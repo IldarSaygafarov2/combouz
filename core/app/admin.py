@@ -14,7 +14,8 @@ from .models import (
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    pass
+    list_display = ("pk", "email", "phone_number", "is_staff")
+    ordering = ["email"]
 
 
 @admin.register(Category)

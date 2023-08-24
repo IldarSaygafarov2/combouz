@@ -1,15 +1,22 @@
-{% load static %}
+{% load static custom_tags %}
+
+
+{% is_page_sorted 'price' request as is_sorted_by_price %}
+{% is_page_sorted 'created_at' request as is_sorted_by_time %}
+{% is_page_sorted 'name' request as is_sorted_by_name %}
+
+
 
 <div class="goods-filters__right">
     <div class="goods-filters__sort">
-        <a class="goods-filters__sort-link active" href="#">
+        <a class="goods-filters__sort-link {% if is_sorted_by_price %}active{% endif %}" href="?sort=price">
             <span>По цене</span>
             <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
         </a>
-        <a class="goods-filters__sort-link" href="#"><span>Новинки</span>
+        <a class="goods-filters__sort-link {% if is_sorted_by_time %}active{% endif %}" href="?sort=created_at"><span>Новинки</span>
             <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
         </a>
-        <a class="goods-filters__sort-link" href="#"><span>По наименованию</span>
+        <a class="goods-filters__sort-link {% if is_sorted_by_name %}active{% endif %}" href="?sort=name"><span>По наименованию</span>
             <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
         </a>
     </div>

@@ -1,0 +1,19 @@
+{% load static custom_tags %}
+
+{% get_unique_elements 'manufacturer' as elements %}
+
+<h4 class="goods-filters__accordion-name">
+    <span>Производитель</span>
+    <img src="{% static 'images/icons/arrow-bottom.svg' %}" alt="">
+</h4>
+<div class="goods-filters__accordion-content">
+    <ul class="goods-filters__accordion-list">
+        {% for item in elements %}
+        <li class="goods-filters__accordion-elem">
+            <a class="goods-filters__accordion-link" href="?sort=owner_{{ item }}">
+                <span>{{ item }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

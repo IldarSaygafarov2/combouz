@@ -43,18 +43,24 @@
             <div class="header__items">
                 <ul class="header__list">
                     {% for category in categories %}
-                    <li class="header__list-item">
-                        <a class="header__link" href="{{ category.get_absolute_url }}">
-                            {{ category }}
-                        </a>
-                    </li>
+                        <li class="header__list-item">
+                            <a class="header__link" href="{{ category.get_absolute_url }}">
+                                {{ category }}
+                            </a>
+                        </li>
                     {% endfor %}
-                    <li class="header__list-item">
-                        <a class="header__link header__link-sp" href="#!">Авторизация / Регистрация</a>
-                    </li>
+                    {% if not request.user.is_authenticated %}
+                        <li class="header__list-item">
+                            <a class="header__link header__link-sp" href="#!">Авторизация / Регистрация</a>
+                        </li>
+                    {% else %}
+                        <li class="header__list-item">
+                            <a class="header__link" href="{% url 'logout' %}">Выйти</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <ul class="header__list header__list-se">
-                    <li class="header__list-se-item"><a class="header__link-se" href="#!">
+                    <li class="header__list-se-item"><a class="header__link-se" href="#">
                         <img src="{% static 'images/icons/heart.svg' %}" alt="combo.uz favorites">
                     </a>
                     </li>
