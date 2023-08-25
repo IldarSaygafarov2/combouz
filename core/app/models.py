@@ -15,6 +15,9 @@ class CustomUser(AbstractUser):
 
     objects = CustomUserManager()
 
+    def get_name_by_email(self):
+        return str(self.email).split("@")[0]
+
     class Meta:
         ordering = ["email"]
 
@@ -149,3 +152,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author}: {self.product}"
+
+
+
+class Order(models.Model):
+    first_name = models.CharField(verbose_name="Имя", max_length=150)
+    last_name = models.CharField(verbose_name="Фамилия", max_length=150)
+    email = models.EmailField(verbose_name="Почта")
+    phone_number = models.CharField(verbose_name="Номер телефона", max_length=15)
+    mounting_type = models.CharField(verbose_name="Тип монтажа", max_length=255)
+    address = models.CharField(verbose_name="Адрес", max_length=255)
+    delivery_type = models.CharField(verbose_name="Способ доставки", max_length=150)
+
+    def __str__(self):
+        return self.first_name

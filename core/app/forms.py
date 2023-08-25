@@ -6,7 +6,7 @@ from .models import CustomUser, Comment
 
 class CustomUserAuthenticationForm(AuthenticationForm):
 
-    email = forms.EmailField(required=True, label="Почта", widget=forms.EmailInput(attrs={
+    username = forms.CharField(required=True, label="Почта", widget=forms.EmailInput(attrs={
         "class": "modal__form-input",
         "placeholder": "Your email",
         "name": "user-email",
@@ -24,7 +24,7 @@ class CustomUserAuthenticationForm(AuthenticationForm):
 
     class Meta:
         model = CustomUser
-        fields = ("email", "password")
+        # fields = ("email", "password")
 
 
 class CustomUserCreationForm(UserCreationForm):

@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
-from .models import Product, Category, ProjectsGallery, Client
+from .models import Product, Category, ProjectsGallery, Client, Comment
 
 
 def home_view(request):
@@ -19,10 +19,10 @@ def home_view(request):
 def user_login(request):
     form = CustomUserAuthenticationForm(data=request.POST)
     if form.is_valid():
-        email = form.cleaned_data['email']
+        email = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user = authenticate(
-            email=email,
+            username=email,
             password=password
         )
         if user is not None:
@@ -116,10 +116,16 @@ def add_comment(request, product_slug):
 
 
 def product_view(request, product_slug):
+    user = request.user.email.split("@")[0]
+
     product = Product.objects.get(slug=product_slug)
+    comments = product.comments.all()
+
     context = {
         "product": product,
-        "form": CommentForm()
+        "form": CommentForm(),
+        "comments": comments,
+        "username": user
     }
     return render(request, "app/product.html", context)
 

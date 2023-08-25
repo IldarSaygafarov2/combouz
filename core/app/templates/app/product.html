@@ -24,7 +24,7 @@
                 <div class="breadcrumbs__item">
                     <span class="breadcrumbs__line"></span>
                     <a class="breadcrumbs__link active" href="#">
-                        <span>NEW O V - 33</span>
+                        <span>{{ product.name }}</span>
                     </a>
                 </div>
             </div>
@@ -48,37 +48,9 @@
             {% include 'app/components/product/_single-content.html' %}
             {# single-content end #}
 
-            <section class="single-comments">
-                <h3 class="single-comments__title">Комментарии</h3>
-                <div class="single-comments__content">
-                    <form class="single-comments__form" action="{% url 'add_comment' product.slug %}" method="post">
-                        {% csrf_token %}
-                        <div class="single-comments__user">
-                            <img class="single-comments__avatar" src="/assets/images/single-item/user.png"
-                                 alt="user-avatar">
-                            <strong class="single-comments__fullname">Игорь Зубарев</strong>
-                        </div>
-                        {{ form.body }}
-                        </textarea>
-                        <button class="single-comments__btn darkBlueHover">Отправить</button>
-                    </form>
-                    <div class="single-comments__block">
-                        <div class="single-comments__item">
-                            <div class="single-comments__user">
-                                <img class="single-comments__avatar"
-                                     src="/assets/images/single-item/user-2.png"
-                                     alt="user-avatar">
-                                <strong class="single-comments__fullname">Игорь Зубарев</strong>
-                            </div>
-                            <p class="single-comments__descr">
-                                I really appreciate the insights and perspective shared in
-                                this article. It's definitely given me something to think about and has helped me see
-                                things from a different angle. Thank you for writing and sharing!
-                            </p>
-                        </div>
-                    </div>
-                    <a class="single-comments__loadmore" href="#!">Загрузить еще</a></div>
-            </section>
+            {# comments start #}
+            {% include 'app/components/product/_comments.html' %}
+            {# comments end #}
         </div>
     </section>
 {% endblock content %}

@@ -1,0 +1,30 @@
+{% load static %}
+
+<section class="single-comments">
+    <h3 class="single-comments__title">Комментарии</h3>
+    <div class="single-comments__content">
+        <form class="single-comments__form" action="{% url 'add_comment' product.slug %}" method="post">
+            {% csrf_token %}
+            <div class="single-comments__user">
+                <img class="single-comments__avatar" src="{% static 'images/single-item/user.png' %}"
+                     alt="user-avatar">
+                <strong class="single-comments__fullname">{{ username }}</strong>
+            </div>
+            {{ form.body }}
+            </textarea>
+            <button class="single-comments__btn darkBlueHover">Отправить</button>
+        </form>
+        <div class="single-comments__block">
+            {% for comment in comments %}
+                <div class="single-comments__item">
+                    <div class="single-comments__user">
+                        <img class="single-comments__avatar"
+                             src="{% static 'images/single-item/user-2.png' %}" alt="user-avatar">
+                        <strong class="single-comments__fullname">{{ comment.author.get_name_by_email }}</strong>
+                    </div>
+                    <p class="single-comments__descr">{{ comment.body }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="single-comments__loadmore" href="#!">Загрузить еще</a></div>
+</section>
