@@ -1,11 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from .models import CustomUser, Comment
+from .models import CustomUser, Comment, Customer
 
 
 class CustomUserAuthenticationForm(AuthenticationForm):
-
     username = forms.CharField(required=True, label="Почта", widget=forms.EmailInput(attrs={
         "class": "modal__form-input",
         "placeholder": "Your email",
@@ -17,10 +16,6 @@ class CustomUserAuthenticationForm(AuthenticationForm):
         "placeholder": "password",
         "name": "user-password",
     }))
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['username'] = None
 
     class Meta:
         model = CustomUser
@@ -67,3 +62,20 @@ class CommentForm(forms.ModelForm):
                 "cols": ""
             })
         }
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "phone_number",
+            "mounting_type",
+            "address",
+            "comment",
+            "delivery_type",
+            "delivery_option"
+        )
+

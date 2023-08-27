@@ -4,9 +4,9 @@
     <div class="single__left">
         <div class="single__left-images">
             {% for img in product.images.all %}
-                <div class="single__left-item">
-                    <img src="{{ img.photo.url }}" alt="">
-                </div>
+            <div class="single__left-item">
+                <img src="{{ img.photo.url }}" alt="">
+            </div>
             {% endfor %}
         </div>
         <div class="single__left-show" data-img="{{ product.get_first_photo }}">
@@ -14,7 +14,8 @@
             <img src="{{ product.get_first_photo }}" alt=""></div>
     </div>
 
-    <form class="single__right">
+    <form class="single__right" method="post" action="{% url 'add_to_basket' %}">
+        {% csrf_token %}
         <h2 class="single__right-title">{{ product.name }}</h2>
         <strong class="single__right-feature size">Размер</strong>
         <div class="single__right-sep size">
@@ -27,7 +28,7 @@
                         {{ product.get_choices_range.0 }}
                     </option>
                     {% for choice in product.get_choices_range %}
-                        <option value="{{ choice }}">{{ choice }}</option>
+                    <option value="{{ choice }}">{{ choice }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -39,7 +40,7 @@
                         {{ product.get_choices_range.0 }}
                     </option>
                     {% for choice in product.get_choices_range %}
-                        <option value="{{ choice }}">{{ choice }}</option>
+                    <option value="{{ choice }}">{{ choice }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -61,7 +62,7 @@
         <div class="single__right-sep count">
             <select class="single__right-select" name="item-count">
                 {% for item in product.get_quantity_range %}
-                    <option value="{{ item }}">{{ item }}</option>
+                <option value="{{ item }}">{{ item }}</option>
                 {% endfor %}
             </select>
             <span class="single__right-info">штук</span>
@@ -99,8 +100,8 @@
             <button class="single__right-btn darkBlueHover" type="submit">
                 <strong>В корзину</strong>
                 <span class="single__right-icon">
-                                <img src="{% static 'images/icons/work-light.svg' %}" alt="">
-                            </span>
+                    <img src="{% static 'images/icons/work-light.svg' %}" alt="">
+                </span>
             </button>
         </div>
     </form>

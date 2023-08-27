@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
-from .models import Product, Category, ProjectsGallery, Client, Comment
+from .models import Product, Category, ProjectsGallery, Client
 
 
 def home_view(request):
@@ -128,6 +128,11 @@ def product_view(request, product_slug):
         "username": user
     }
     return render(request, "app/product.html", context)
+
+
+def add_to_basket(request):
+    print(request.POST)
+    return redirect('cart')
 
 
 def basket_view(request):
