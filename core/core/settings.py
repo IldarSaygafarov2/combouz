@@ -95,3 +95,5 @@ AUTHENTICATION_BACKENDS = ['app.backends.EmailBackend']
 
 AUTH_USER_MODEL = "app.CustomUser"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+CART_SESSION_ID = "cart"
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 28

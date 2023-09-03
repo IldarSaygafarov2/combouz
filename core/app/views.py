@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
+from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
 from .models import Product, Category, ProjectsGallery, Client
 
@@ -135,5 +136,31 @@ def add_to_basket(request):
     return redirect('cart')
 
 
+qd = None
+
+
+
+
+
+def to_cart(request, product_id, action):
+    global qd
+    qd = request.POST
+    if not request.user.is_authenticated:
+        session_cart = CartForAnonymousUser(request, product_id, action)
+    else:
+        user_cart = CartForAuthenticatedUser(request, product_id, action, query_dict=request.POST)
+
+    return redirect("cart")
+
+
 def basket_view(request):
-    return render(request, "app/basket.html")
+    cart_info = get_cart_data(request)
+    global qd
+    print(qd)
+    context = {
+        "cart_total_quantity": cart_info["cart_total_quantity"],
+        "cart_total_price": cart_info["cart_total_price"],
+        "order": cart_info["order"],
+        "products": cart_info["products"]
+    }
+    return render(request, "app/basket.html", context)

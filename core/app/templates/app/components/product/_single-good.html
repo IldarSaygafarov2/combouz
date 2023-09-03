@@ -14,7 +14,7 @@
             <img src="{{ product.get_first_photo }}" alt=""></div>
     </div>
 
-    <form class="single__right" method="post" action="{% url 'add_to_basket' %}">
+    <form class="single__right" method="post" action="{% url 'to_cart' product.pk 'add' %}">
         {% csrf_token %}
         <h2 class="single__right-title">{{ product.name }}</h2>
         <strong class="single__right-feature size">Размер</strong>
