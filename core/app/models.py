@@ -154,7 +154,6 @@ class Comment(models.Model):
         return f"{self.author}: {self.product}"
 
 
-
 class Order(models.Model):
     first_name = models.CharField(verbose_name="Имя", max_length=150)
     last_name = models.CharField(verbose_name="Фамилия", max_length=150)
