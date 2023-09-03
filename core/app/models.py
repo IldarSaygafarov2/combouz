@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.templatetags.static import static
 from django.urls import reverse
+
 from .managers import CustomUserManager
 
 
@@ -19,6 +20,8 @@ class CustomUser(AbstractUser):
         return str(self.email).split("@")[0]
 
     class Meta:
+        verbose_name = "Пользовать"
+        verbose_name_plural = "Пользователи"
         ordering = ["email"]
 
 
@@ -154,14 +157,44 @@ class Comment(models.Model):
         return f"{self.author}: {self.product}"
 
 
-class Order(models.Model):
+
+class Customer(models.Model):
     first_name = models.CharField(verbose_name="Имя", max_length=150)
     last_name = models.CharField(verbose_name="Фамилия", max_length=150)
     email = models.EmailField(verbose_name="Почта")
     phone_number = models.CharField(verbose_name="Номер телефона", max_length=15)
     mounting_type = models.CharField(verbose_name="Тип монтажа", max_length=255)
     address = models.CharField(verbose_name="Адрес", max_length=255)
-    delivery_type = models.CharField(verbose_name="Способ доставки", max_length=150)
+    comment = models.CharField(verbose_name="Коментарий", max_length=1000, default="")
+    delivery_type = models.CharField(verbose_name="Тип доставки", max_length=150)
+    delivery_option = models.CharField(verbose_name="Варинт доставки", max_length=150, default="")
 
     def __str__(self):
         return self.first_name
+
+
+class Order(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_completed = models.BooleanField(default=False)
+
+    @property
+    def get_cart_total_price(self):
+        order_products = self.orderproduct_set.all()
+        return sum([item.get_total_price for item in order_products])
+
+    @property
+    def get_cart_total_quantity(self):
+        order_products = self.orderproduct_set.all()
+        return sum([item.quantity for item in order_products])
+
+
+class OrderProduct(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="order_products")
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=0)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_total_price(self):
+        return self.product.price * self.quantity
