@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'constance',
 ]
 
 MIDDLEWARE = [
@@ -97,3 +99,22 @@ AUTH_USER_MODEL = "app.CustomUser"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CART_SESSION_ID = "cart"
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 28
+
+BOT_TOKEN = "6651100598:AAE0CSIZJ4D9JX-DRnGk_qTYdJ2WX-bzrb8"
+CHANNEL_ID = -1001965630465
+CHANNEL_API_LINK = "https://api.telegram.org/bot{token}/sendMessage?chat_id={channel_id}&text={text}"
+
+
+CONSTANCE_BACKEND = 'constance.backends.memory.MemoryBackend'
+
+CONSTANCE_CONFIG = OrderedDict([
+    ('EMAIL', ('My Title', 'Website title')),
+    ('SITE_DESCRIPTION', ('', 'Website description')),
+    ('THEME', ('light-blue', 'Website theme')),
+])
+
+
+CONSTANCE_CONFIG_FIELDSETS = {
+    'Общие данные': ('EMAIL', 'SITE_DESCRIPTION'),
+    'Theme Options': ('THEME',),
+}

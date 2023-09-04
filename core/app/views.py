@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
 from .models import Product, Category, ProjectsGallery, Client
+from core import settings
+import requests as req
 
 
 def home_view(request):
@@ -63,10 +65,6 @@ def about_view(request):
 
 def contacts_view(request):
     return render(request, "app/contacts.html")
-
-
-def categories_view(request):
-    return render(request, "app/categories.html")
 
 
 def sort_products(request, queryset):
@@ -131,15 +129,7 @@ def product_view(request, product_slug):
     return render(request, "app/product.html", context)
 
 
-def add_to_basket(request):
-    print(request.POST)
-    return redirect('cart')
-
-
 qd = None
-
-
-
 
 
 def to_cart(request, product_id, action):
@@ -156,7 +146,6 @@ def to_cart(request, product_id, action):
 def basket_view(request):
     cart_info = get_cart_data(request)
     global qd
-    print(qd)
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
@@ -164,3 +153,19 @@ def basket_view(request):
         "products": cart_info["products"]
     }
     return render(request, "app/basket.html", context)
+
+
+def send_phone_number_to_telegram(request):
+    phone_number = request.POST.get("phone_number")
+    msg = f"""
+Оставленный номер телефона: {phone_number}
+"""
+    req.post(
+        settings.CHANNEL_API_LINK.format(
+            token=settings.BOT_TOKEN,
+            channel_id=settings.CHANNEL_ID,
+            text=msg
+        )
+    )
+
+    return redirect('home')
