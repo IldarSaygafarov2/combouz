@@ -1,20 +1,31 @@
+import requests as req
 from django.contrib.auth import login, authenticate, logout
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
+from core import settings
 from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
-from .models import Product, Category, ProjectsGallery, Client
-from core import settings
-import requests as req
+from .models import Product, Category, ProjectsGallery, Client, Feedback, FAQ
 
 
 def home_view(request):
+    correct_videos = []
+
     gallery_projects = ProjectsGallery.objects.all()
+    feedbacks = Feedback.objects.all()
+    videos = FAQ.objects.all()
+
+    for video in videos:
+        video = video.youtube_video_url.replace('youtu.be', 'www.youtube.com/embed')
+        correct_videos.append(video)
+
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
-        "gallery_projects": gallery_projects
+        "gallery_projects": gallery_projects,
+        "feedbacks": feedbacks,
+        "videos_urls": correct_videos
     }
     return render(request, "app/index.html", context)
 
@@ -138,7 +149,7 @@ def to_cart(request, product_id, action):
     if not request.user.is_authenticated:
         session_cart = CartForAnonymousUser(request, product_id, action)
     else:
-        user_cart = CartForAuthenticatedUser(request, product_id, action, query_dict=request.POST)
+        user_cart = CartForAuthenticatedUser(request, product_id, action)
 
     return redirect("cart")
 
@@ -146,6 +157,10 @@ def to_cart(request, product_id, action):
 def basket_view(request):
     cart_info = get_cart_data(request)
     global qd
+
+    if request.method == "POST":
+        print(request.POST)
+
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],

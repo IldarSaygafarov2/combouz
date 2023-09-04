@@ -3,34 +3,16 @@
             <h2 class="have-questions__title">Есть вопросы, мы вам поможем?</h2>
         </div>
         <div class="have-questions__grid">
+            {% for url in videos_urls %}
             <iframe
                     class="have-questions__video"
                     width="1280"
-                    src="https://www.youtube.com/embed/E3Huy2cdih0"
-                    title="ELDEN RING - Official Gameplay Reveal"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-            ></iframe
-            >
-            <iframe
-                    class="have-questions__video"
-                    width="1280"
-                    src="https://www.youtube.com/embed/E3Huy2cdih0"
-                    title="ELDEN RING - Official Gameplay Reveal"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-            ></iframe
-            >
-            <iframe
-                    class="have-questions__video"
-                    width="1280"
-                    src="https://www.youtube.com/embed/E3Huy2cdih0"
-                    title="ELDEN RING - Official Gameplay Reveal"
+                    src="{{ url }}"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen
             ></iframe>
+            {% endfor %}
         </div>
     </section>
+{#https://youtu.be/xGVEVrpWjJg?si=d1MQgatrny02LkgE#}

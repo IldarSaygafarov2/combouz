@@ -108,13 +108,19 @@ CHANNEL_API_LINK = "https://api.telegram.org/bot{token}/sendMessage?chat_id={cha
 CONSTANCE_BACKEND = 'constance.backends.memory.MemoryBackend'
 
 CONSTANCE_CONFIG = OrderedDict([
-    ('EMAIL', ('My Title', 'Website title')),
-    ('SITE_DESCRIPTION', ('', 'Website description')),
-    ('THEME', ('light-blue', 'Website theme')),
+    ('EMAIL', ('info@combo.uz', 'Почта для связи')),
+    ('PHONE_NUMBER', ('+998 (95) 142 - 33 - 13', 'Номер для связи')),
+    ('OFFICE_ADDRESS', ('г.Ташкент, Алмазарский район, ул.Сагбан 37/1', 'Локация офиса')),
+    ('WORKING_TIME', ('с 9:00 до 19:00', 'Режим работы')),
+    ('CALLING_TIME', ('с 8:00 до 20:00', 'Режим звонков')),
+    ('INSTAGRAM_LINK', ('', 'Ссылка на аккаунт instagram')),
+    ('FACEBOOK_LINK', ('', 'Ссылка на аккаунт facebook')),
+    ('TELEGRAM_LINK', ('', 'Ссылка на аккаунт telegram')),
 ])
 
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    'Общие данные': ('EMAIL', 'SITE_DESCRIPTION'),
-    'Theme Options': ('THEME',),
+    'Общие данные': ('EMAIL', 'PHONE_NUMBER', 'OFFICE_ADDRESS',  'WORKING_TIME', 'CALLING_TIME'),
+    'Социальные сети': ('INSTAGRAM_LINK', 'FACEBOOK_LINK', 'TELEGRAM_LINK'),
+    # 'Theme Options': ('THEME',),
 }

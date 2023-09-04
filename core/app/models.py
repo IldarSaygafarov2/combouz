@@ -76,7 +76,7 @@ class Product(models.Model):
     fabric_type = models.CharField(verbose_name="Тип ткани", max_length=150)
     property = models.CharField(verbose_name="Свойство", max_length=100)
     dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
-    price = models.CharField(verbose_name="Цена", max_length=100)
+    price = models.SmallIntegerField(verbose_name="Цена", default=0)
     description = models.TextField(verbose_name="Описание продукта")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
     slug = models.SlugField(default="")
@@ -199,3 +199,26 @@ class OrderProduct(models.Model):
     @property
     def get_total_price(self):
         return int(self.product.price) * self.quantity
+
+
+class Feedback(models.Model):
+    body = models.TextField(verbose_name="Текст отзыва")
+    feedback_author = models.CharField(verbose_name="Имя автора отзыва", max_length=255)
+    author_company = models.CharField(verbose_name="Компания автора отзыва", max_length=255)
+    avatar = models.ImageField(verbose_name="Фото автора отзыва", upload_to="feedback/author/")
+
+    def __str__(self):
+        return f"{self.feedback_author}: {self.body[:100]}..."
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+
+
+class FAQ(models.Model):
+    youtube_video_url = models.URLField(verbose_name="Ссылка на видео",
+                                        help_text="Нужно поставить ссылку из встраивания видео с ютуба")
+
+    class Meta:
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"

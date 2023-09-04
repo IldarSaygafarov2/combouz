@@ -37,14 +37,18 @@
             </div>
         </div>
     </div>
-    <form class="busket" action="" method="POST">
-        <div class="container">
-            {% include 'app/components/basket/_basket-top.html' %}
-        </div>
+    {% if products %}
+        <form class="busket" action="{% url 'cart' %}" method="POST">
+            {% csrf_token %}
+            <div class="container">
+                {% include 'app/components/basket/_basket-top.html' %}
+            </div>
 
-        {% include 'app/components/basket/_basket-form.html' %}
-
-    </form>
+            {% include 'app/components/basket/_basket-form.html' %}
+        </form>
+    {% else %}
+        <h1>Корзина пуста</h1>
+    {% endif %}
     <div class="busket-modal">
         <div class="busket-modal__content">
             <p class="busket-modal__descr">С вами свяжутся в ближайшее время</p>

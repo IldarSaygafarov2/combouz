@@ -1,6 +1,8 @@
 {% load static custom_tags %}
 
 {% get_categories as categories %}
+{% get_config as config %}
+{% get_cart_total_qty request as total_qty %}
 
 <div class="header-top">
     <div class="container">
@@ -14,15 +16,15 @@
             </ul>
             <ul class="header-top__right">
                 <li class="header-top__right-item">
-                    <a class="header-top__right-link header-top__right-link-first" href="mailto:info@combo.uz">
+                    <a class="header-top__right-link header-top__right-link-first" href="mailto:{{ config.EMAIL }}">
                         <img src="{% static 'images/icons/message.svg' %}" alt="combo.uz mail">
-                        <span>info@combo.uz</span>
+                        <span>{{ config.EMAIL }}</span>
                     </a>
                 </li>
                 <li class="header-top__right-item">
                     <a class="header-top__right-link" href="tel:+998951423313">
                         <img src="{% static 'images/icons/call.svg' %}" alt="combo.uz phone number">
-                        <span>+998 (95) 142 - 33 - 13</span>
+                        <span>{{ config.PHONE_NUMBER }}</span>
                     </a>
                 </li>
                 <li class="header-top__right-item">
@@ -67,7 +69,7 @@
                     <li class="header__list-se-item">
                         <a class="header__link-se" href="{% url 'cart' %}">
                             <img src="{% static 'images/icons/work.svg' %}" alt="combo.uz busket goods">
-                            <span class="header__busket-notify have-goods">2</span>
+                            <span class="header__busket-notify have-goods">{{ total_qty }}</span>
                         </a>
                     </li>
                 </ul>

@@ -1,15 +1,10 @@
-{% load static %}
-
 <div class="reviews__item">
-    <p class="reviews__descr">
-        Lorem ipsum dolor sit amet consectetur adipiscing elit Proin venenatis
-        pellentesque vitae porta consectetur nunc.
-    </p>
+    <p class="reviews__descr">{{ review.body }}</p>
     <div class="reviews__author">
-        <img src="{% static 'images/main-page/review.png' %}" alt="Combo.uz review"/>
+        <img src="{{ review.avatar.url }}" alt="Combo.uz review"/>
         <div class="reviews__text">
-            <h4 class="reviews__name">Игорь Иванов</h4>
-            <p class="reviews__company">Samsung Company</p>
+            <h4 class="reviews__name">{{ review.feedback_author }}</h4>
+            <p class="reviews__company">{{ review.author_company }}</p>
         </div>
     </div>
 </div>

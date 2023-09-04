@@ -1,4 +1,7 @@
-{% load static %}
+{% load static custom_tags %}
+
+
+{% get_config as config %}
 
 <footer class="footer">
   <div class="container">
@@ -12,11 +15,9 @@
             /><strong>Телефоны</strong>
           </li>
           <li class="footer__list-item">
-            <a class="footer__list-link-se" href="tel:+998951423313"
-              >+998 (95) 142 - 33 - 13</a
-            >
+            <a class="footer__list-link-se" href="tel:+998951423313">{{ config.PHONE_NUMBER }}</a>
           </li>
-          <li class="footer__list-item"><span>(с 8:00 до 21:00)</span></li>
+          <li class="footer__list-item"><span>({{ config.CALLING_TIME }})</span></li>
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">
@@ -26,9 +27,7 @@
             /><strong>Почта</strong>
           </li>
           <li class="footer__list-item">
-            <a class="footer__list-link" href="mailto:info@combo.uz"
-              >info@combo.uz</a
-            >
+            <a class="footer__list-link" href="mailto:{{ config.EMAIL }}">{{ config.EMAIL }}</a>
           </li>
           <li class="footer__list-item"><span>Отдел продаж</span></li>
         </ul>
@@ -44,7 +43,7 @@
               class="footer__list-link"
               href="https://www.google.com/maps/search/%D0%B3.%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82,+%D0%90%D0%BB%D0%BC%D0%B0%D0%B7%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%B9+%D1%80%D0%B0%D0%B9%D0%BE%D0%BD,+%D1%83%D0%BB.%D0%A1%D0%B0%D0%B3%D0%B1%D0%B0%D0%BD+37%2F1/@41.3305483,69.2321323,17z/data=!3m1!4b1?entry=ttu"
               target="_blank"
-              >г.Ташкент, Алмазарский район, ул.Сагбан 37/1</a
+              >{{ config.OFFICE_ADDRESS }}</a
             >
           </li>
           <li class="footer__list-item"><span>Офис</span></li>
@@ -57,7 +56,7 @@
             /><strong>Режим работы</strong>
           </li>
           <li class="footer__list-item">
-            <div class="footer__list-link-se">с 9:00 до 19:00</div>
+            <div class="footer__list-link-se">{{ config.WORKING_TIME }}</div>
           </li>
           <li class="footer__list-item"><span>Пн-Пт</span></li>
         </ul>
@@ -112,8 +111,7 @@
                 <circle cx="25" cy="25" r="24.5" stroke="#0F9ED8" />
                 <path
                   d="M27.2 15.875C25.9734 15.875 24.797 16.3623 23.9296 17.2296C23.0623 18.097 22.575 19.2734 22.575 20.5V23.075H20.1C19.976 23.075 19.875 23.175 19.875 23.3V26.7C19.875 26.824 19.975 26.925 20.1 26.925H22.575V33.9C22.575 34.024 22.675 34.125 22.8 34.125H26.2C26.324 34.125 26.425 34.025 26.425 33.9V26.925H28.922C29.025 26.925 29.115 26.855 29.14 26.755L29.99 23.355C29.9984 23.3218 29.9991 23.2872 29.992 23.2537C29.985 23.2202 29.9704 23.1888 29.9494 23.1618C29.9283 23.1348 29.9014 23.1129 29.8707 23.0979C29.84 23.0829 29.8062 23.075 29.772 23.075H26.425V20.5C26.425 20.3982 26.445 20.2974 26.484 20.2034C26.5229 20.1094 26.58 20.024 26.652 19.952C26.724 19.88 26.8094 19.8229 26.9034 19.784C26.9974 19.745 27.0982 19.725 27.2 19.725H29.8C29.924 19.725 30.025 19.625 30.025 19.5V16.1C30.025 15.976 29.925 15.875 29.8 15.875H27.2Z"
-                  fill="#0F9ED8"
-                /></svg
+                  fill="#0F9ED8"/></svg
             ></a>
           </li>
           <li class="footer__bottom-list-item">

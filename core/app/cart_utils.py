@@ -3,8 +3,11 @@ from .models import Order, OrderProduct, Product, Customer
 
 
 class CartForAuthenticatedUser:
-    def __init__(self, request, product_id=None, action=None, query_dict=None):
+    def __init__(self, request, product_id=None, action=None):
         self.user = request.user
+
+        if action == 'delete_all':
+            self.clear()
 
         if product_id and action:
             self.add_or_delete(product_id, action)

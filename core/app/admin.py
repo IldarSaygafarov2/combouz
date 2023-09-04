@@ -4,13 +4,25 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
 from .models import (
     Category,
+    Client,
+    CustomUser,
+    Feedback,
+    FAQ,
     ProductOption,
     Product,
     ProductImage,
-    CustomUser,
     ProjectsGallery,
-    Client
 )
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(CustomUser)

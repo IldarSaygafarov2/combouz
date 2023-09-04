@@ -3,8 +3,8 @@
         262: function () {
             var e = document.querySelector(".busket-bottom__btn"), t = document.querySelector(".busket-modal"),
                 n = null == t ? void 0 : t.querySelector(".busket-modal__close"), r = document.querySelector(".busket");
-            e && t && r && (r.addEventListener("submit", (function (e) {
-                e.preventDefault(), t.classList.add("show"), setTimeout((function () {
+            e && t && r && (r.addEventListener("submit", (function (ev) {
+                ev.preventDefault(), t.classList.add("show"), setTimeout((function () {
                     t.classList.remove("show")
                 }), 3e3)
             })), null == n || n.addEventListener("click", (function (e) {

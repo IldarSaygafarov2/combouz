@@ -1,8 +1,21 @@
 from django import template
 
 from app.models import Category, Product
+from app.cart_utils import get_cart_data
 
 register = template.Library()
+
+
+@register.simple_tag()
+def get_cart_total_qty(request):
+    cart_data = get_cart_data(request)
+    return cart_data["cart_total_quantity"]
+
+
+@register.simple_tag()
+def get_config():
+    from constance import config
+    return config
 
 
 @register.simple_tag()
@@ -37,5 +50,3 @@ def get_unique_elements(sort_field):
             if product.manufacturer_country not in result:
                 result.append(product.manufacturer_country)
     return result
-
-
