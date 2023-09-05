@@ -6,7 +6,53 @@ from django.shortcuts import render, redirect
 from core import settings
 from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
-from .models import Product, Category, ProjectsGallery, Client, Feedback, FAQ
+from .models import Product, Category, ProjectsGallery, Client, Feedback, FAQ, MessageTelegram
+
+DELIVERY_TYPES = {
+    'takeaway': "Доставка курьером",
+    'pickup': 'Самовывоз - 0 сум',
+    'install,size,delivery': 'Установка, размер, доставка',
+    'install,delivery': 'Доставка и установка',
+    'delivery-tashkent': 'Доставка по городу Ташкент'
+}
+
+CORNICE_TYPES = {
+    'aluminium': 'Алюминевый',
+    'plastic': 'Пластиковый'
+}
+
+CONTROL_TYPES = {
+    'manual': 'Ручной',
+    'electro': 'С электроприводом'
+}
+
+
+def __make_product_variant_msg(product_data):
+    if not product_data:
+        return
+
+    return f"""
+Ширина: {product_data['item-width']}
+Длина: {product_data['item-length']}
+Управление: {'Слева' if product_data['item-control'] == 'left' else 'Справа'}
+Кол-во: {product_data['item-count']}
+Тип карниза: {CORNICE_TYPES[product_data['item-cornice-type']]}
+Тип управления: {CONTROL_TYPES[product_data['item-control-type']]}
+"""
+
+
+def __make_basket_products_msg(basket_data):
+    return f"""
+Вариант Доставки: {DELIVERY_TYPES[basket_data['busket-delivery']]}
+Фамилия: {basket_data['busket-surname']}
+Имя: {basket_data['busket-name']}
+Почта: {basket_data['busket-email']}
+Номер телефона: {basket_data['busket-phone']}
+Тип монтажа: {basket_data['busket-montage']}
+Адрес: {basket_data['busket-address']}
+Комментарий: {basket_data['busket-comment']}
+Тип доставки: {DELIVERY_TYPES[basket_data['busket-delivery-type']]}
+"""
 
 
 def home_view(request):
@@ -140,12 +186,16 @@ def product_view(request, product_slug):
     return render(request, "app/product.html", context)
 
 
-qd = None
-
-
 def to_cart(request, product_id, action):
-    global qd
-    qd = request.POST
+    product_msg = __make_product_variant_msg(request.POST)
+    product = Product.objects.get(pk=product_id)
+
+    obj = MessageTelegram.objects.create(
+        product=product,
+        product_msg=product_msg
+    )
+    obj.save()
+
     if not request.user.is_authenticated:
         session_cart = CartForAnonymousUser(request, product_id, action)
     else:
@@ -156,10 +206,13 @@ def to_cart(request, product_id, action):
 
 def basket_view(request):
     cart_info = get_cart_data(request)
-    global qd
 
-    if request.method == "POST":
-        print(request.POST)
+    print([product.product.pk for product in cart_info["products"]])
+
+    if request.method == 'POST':
+        basket_msg = __make_basket_products_msg(request.POST)
+        for product in cart_info["products"]:
+            pass
 
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],

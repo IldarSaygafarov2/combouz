@@ -222,3 +222,12 @@ class FAQ(models.Model):
     class Meta:
         verbose_name = "Вопрос"
         verbose_name_plural = "Вопросы"
+
+
+class MessageTelegram(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    order = models.ForeignKey(Order, on_delete=models.DO_NOTHING, null=True, blank=True)
+    product_msg = models.TextField(blank=True, null=True)
+    basket_msg = models.TextField(blank=True, null=True)
+
+

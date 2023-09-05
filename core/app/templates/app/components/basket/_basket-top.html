@@ -27,7 +27,7 @@
                     </div>
                     <p class="busket-top__control price">{{ cart_product.product.price }} сум</p>
                     <p class="busket-top__control total">{{ cart_product.get_total_price }} сум</p>
-                    <a class="busket-top__remove" href="{% url 'to_cart' cart_product.product.pk 'delete_all' %}">
+                    <a class="busket-top__remove" href="{% url 'to_cart' cart_product.product.pk 'delete_product' %}">
                         <img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon">
                     </a>
                 </div>
