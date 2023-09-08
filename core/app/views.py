@@ -8,6 +8,10 @@ from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
 from .models import Product, Category, ProjectsGallery, Client, Feedback, FAQ, MessageTelegram
 
+import freecurrencyapi
+client = freecurrencyapi.Client(settings.CURRENCY_API_KEY)
+
+
 DELIVERY_TYPES = {
     'takeaway': "Доставка курьером",
     'pickup': 'Самовывоз - 0 сум',

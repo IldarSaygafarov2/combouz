@@ -124,3 +124,5 @@ CONSTANCE_CONFIG_FIELDSETS = {
     'Социальные сети': ('INSTAGRAM_LINK', 'FACEBOOK_LINK', 'TELEGRAM_LINK'),
     # 'Theme Options': ('THEME',),
 }
+
+CURRENCY_API_KEY = "fca_live_73iJi9CwrqHPSSHxeUt8lcURW7qYXN692Qaa2yTS"
