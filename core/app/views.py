@@ -8,10 +8,6 @@ from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart
 from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
 from .models import Product, Category, ProjectsGallery, Client, Feedback, FAQ, MessageTelegram
 
-import freecurrencyapi
-client = freecurrencyapi.Client(settings.CURRENCY_API_KEY)
-
-
 DELIVERY_TYPES = {
     'takeaway': "Доставка курьером",
     'pickup': 'Самовывоз - 0 сум',
@@ -34,6 +30,8 @@ CONTROL_TYPES = {
 def __make_product_variant_msg(product_data):
     if not product_data:
         return
+
+    print(product_data.values())
 
     return f"""
 Ширина: {product_data['item-width']}
@@ -60,15 +58,14 @@ def __make_basket_products_msg(basket_data):
 
 
 def home_view(request):
-    correct_videos = []
+
+    products_with_discount = Product.objects.filter(discount__gt=0)
+    print(products_with_discount)
 
     gallery_projects = ProjectsGallery.objects.all()
     feedbacks = Feedback.objects.all()
     videos = FAQ.objects.all()
-
-    for video in videos:
-        video = video.youtube_video_url.replace('youtu.be', 'www.youtube.com/embed')
-        correct_videos.append(video)
+    correct_videos = [video.youtube_video_url.replace('youtu.be', 'www.youtube.com/embed') for video in videos]
 
     context = {
         "registration_form": CustomUserCreationForm(),
@@ -176,7 +173,6 @@ def add_comment(request, product_slug):
 
 
 def product_view(request, product_slug):
-    user = request.user.email.split("@")[0]
 
     product = Product.objects.get(slug=product_slug)
     comments = product.comments.all()
@@ -185,7 +181,6 @@ def product_view(request, product_slug):
         "product": product,
         "form": CommentForm(),
         "comments": comments,
-        "username": user
     }
     return render(request, "app/product.html", context)
 
@@ -211,11 +206,13 @@ def to_cart(request, product_id, action):
 def basket_view(request):
     cart_info = get_cart_data(request)
 
-    print([product.product.pk for product in cart_info["products"]])
+    if request.user.is_authenticated:
+        print([product.product.pk for product in cart_info["products"]])
 
     if request.method == 'POST':
         basket_msg = __make_basket_products_msg(request.POST)
         for product in cart_info["products"]:
+            print(product)
             pass
 
     context = {

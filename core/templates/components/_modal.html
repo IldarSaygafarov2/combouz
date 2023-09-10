@@ -1,4 +1,6 @@
-{% load static %}
+{% load static socialaccount %}
+
+{% providers_media_js %}
 
 <div class="modal">
     <div class="modal__content">
@@ -61,11 +63,11 @@
                     <button class="modal__form-btn modal__form-reg-btn darkBlueHover" type="submit">
                         Регистрация
                     </button>
-                    <a class="modal__form-login" href="#">
+                    <a class="modal__form-login" href="{% provider_login_url 'google' %}?next=/">
                         <img src="{% static 'images/icons/google-logo.svg' %}" alt="google logo"/>
                         <span>Войти через Google </span>
                     </a>
-                    <a class="modal__form-login" href="#">
+                    <a class="modal__form-login" href="{% provider_login_url 'facebook'%}">
                         <img src="{% static 'images/icons/facebook-logo.svg' %}" alt="google logo"/>
                         <span>Войти через Facebook</span>
                     </a>

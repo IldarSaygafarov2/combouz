@@ -116,7 +116,7 @@ class CartForAnonymousUser:
                     "pk": product.pk,
                     "product": {
                         "pk": product.pk,
-                        "title": product.title,
+                        "name": product.name,
                         "price": product.price,
                         "get_first_photo": product.get_first_photo(),
                         "quantity": product.quantity,

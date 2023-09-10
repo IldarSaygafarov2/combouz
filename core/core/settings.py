@@ -18,6 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'constance',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -93,8 +99,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = ['app.backends.EmailBackend']
-
 AUTH_USER_MODEL = "app.CustomUser"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CART_SESSION_ID = "cart"
@@ -103,7 +107,6 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 28
 BOT_TOKEN = "6651100598:AAE0CSIZJ4D9JX-DRnGk_qTYdJ2WX-bzrb8"
 CHANNEL_ID = -1001965630465
 CHANNEL_API_LINK = "https://api.telegram.org/bot{token}/sendMessage?chat_id={channel_id}&text={text}"
-
 
 CONSTANCE_BACKEND = 'constance.backends.memory.MemoryBackend'
 
@@ -118,11 +121,24 @@ CONSTANCE_CONFIG = OrderedDict([
     ('TELEGRAM_LINK', ('', 'Ссылка на аккаунт telegram')),
 ])
 
-
 CONSTANCE_CONFIG_FIELDSETS = {
-    'Общие данные': ('EMAIL', 'PHONE_NUMBER', 'OFFICE_ADDRESS',  'WORKING_TIME', 'CALLING_TIME'),
+    'Общие данные': ('EMAIL', 'PHONE_NUMBER', 'OFFICE_ADDRESS', 'WORKING_TIME', 'CALLING_TIME'),
     'Социальные сети': ('INSTAGRAM_LINK', 'FACEBOOK_LINK', 'TELEGRAM_LINK'),
     # 'Theme Options': ('THEME',),
 }
 
 CURRENCY_API_KEY = "fca_live_73iJi9CwrqHPSSHxeUt8lcURW7qYXN692Qaa2yTS"
+
+# core/settings.py
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'app.backends.EmailBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL = '/'
