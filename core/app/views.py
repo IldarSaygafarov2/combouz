@@ -206,13 +206,18 @@ def to_cart(request, product_id, action):
 def basket_view(request):
     cart_info = get_cart_data(request)
 
-    if request.user.is_authenticated:
-        print([product.product.pk for product in cart_info["products"]])
+    print(cart_info)
 
     if request.method == 'POST':
         basket_msg = __make_basket_products_msg(request.POST)
+        print(basket_msg)
         for product in cart_info["products"]:
-            print(product)
+
+            if request.user.is_authenticated:
+                message_tg = MessageTelegram.objects.filter(product_id=product.pk)
+            else:
+                message_tg = MessageTelegram.objects.filter(product_id=product['pk'])
+            print([message_tg_obj.product_msg for message_tg_obj in message_tg if message_tg_obj.product_msg])
             pass
 
     context = {
