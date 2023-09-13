@@ -1,30 +1,33 @@
 import requests as req
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 
 from core import settings
+
 from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
-from .forms import CustomUserCreationForm, CustomUserAuthenticationForm, CommentForm
-from .models import Product, Category, ProjectsGallery, Client, Feedback, FAQ, MessageTelegram
+from .forms import CommentForm, CustomUserAuthenticationForm, CustomUserCreationForm
+from .models import (
+    FAQ,
+    Category,
+    Client,
+    Feedback,
+    MessageTelegram,
+    Product,
+    ProjectsGallery,
+)
 
 DELIVERY_TYPES = {
-    'takeaway': "Доставка курьером",
-    'pickup': 'Самовывоз - 0 сум',
-    'install,size,delivery': 'Установка, размер, доставка',
-    'install,delivery': 'Доставка и установка',
-    'delivery-tashkent': 'Доставка по городу Ташкент'
+    "takeaway": "Доставка курьером",
+    "pickup": "Самовывоз - 0 сум",
+    "install,size,delivery": "Установка, размер, доставка",
+    "install,delivery": "Доставка и установка",
+    "delivery-tashkent": "Доставка по городу Ташкент",
 }
 
-CORNICE_TYPES = {
-    'aluminium': 'Алюминевый',
-    'plastic': 'Пластиковый'
-}
+CORNICE_TYPES = {"aluminium": "Алюминевый", "plastic": "Пластиковый"}
 
-CONTROL_TYPES = {
-    'manual': 'Ручной',
-    'electro': 'С электроприводом'
-}
+CONTROL_TYPES = {"manual": "Ручной", "electro": "С электроприводом"}
 
 
 def __make_product_variant_msg(product_data):
@@ -58,21 +61,26 @@ def __make_basket_products_msg(basket_data):
 
 
 def home_view(request):
-
-    products_with_discount = Product.objects.filter(discount__gt=0)
-    print(products_with_discount)
-
+    # querysets
+    categories = Category.objects.filter(show_on_homepage=True)
     gallery_projects = ProjectsGallery.objects.all()
     feedbacks = Feedback.objects.all()
     videos = FAQ.objects.all()
-    correct_videos = [video.youtube_video_url.replace('youtu.be', 'www.youtube.com/embed') for video in videos]
+    best_sellers_category = Category.objects.filter(show_as_bestseller=True).first()
+
+    correct_videos = [
+        video.youtube_video_url.replace("youtu.be", "www.youtube.com/embed")
+        for video in videos
+    ]
 
     context = {
         "registration_form": CustomUserCreationForm(),
         "login_form": CustomUserAuthenticationForm(),
         "gallery_projects": gallery_projects,
         "feedbacks": feedbacks,
-        "videos_urls": correct_videos
+        "videos_urls": correct_videos,
+        "categories": categories,
+        "best_sellers_category": best_sellers_category,
     }
     return render(request, "app/index.html", context)
 
@@ -80,18 +88,15 @@ def home_view(request):
 def user_login(request):
     form = CustomUserAuthenticationForm(data=request.POST)
     if form.is_valid():
-        email = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user = authenticate(
-            username=email,
-            password=password
-        )
+        email = form.cleaned_data["username"]
+        password = form.cleaned_data["password"]
+        user = authenticate(username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect("home")
     else:
         print(form.errors)
-    return redirect('home')
+    return redirect("home")
 
 
 def user_registration(request):
@@ -102,7 +107,7 @@ def user_registration(request):
         user.save()
         return redirect("home")
 
-    return redirect('home')
+    return redirect("home")
 
 
 def user_logout(request):
@@ -114,10 +119,7 @@ def about_view(request):
     gallery_projects = ProjectsGallery.objects.all()
     clients = Client.objects.all()
 
-    context = {
-        "gallery_projects": gallery_projects,
-        "clients": clients
-    }
+    context = {"gallery_projects": gallery_projects, "clients": clients}
     return render(request, "app/about.html", context)
 
 
@@ -126,20 +128,20 @@ def contacts_view(request):
 
 
 def sort_products(request, queryset):
-    sort_field = request.GET.get('sort')
+    sort_field = request.GET.get("sort")
     if sort_field:
         if sort_field == "price":
-            queryset = queryset.order_by('price')
-        elif sort_field == 'created_at':
-            queryset = queryset.order_by('created_at')
-        elif sort_field == 'name':
-            queryset = queryset.order_by('name')
-        elif 'color' in sort_field:
-            queryset = queryset.filter(color=sort_field.split('=')[-1])
-        elif 'dimming' in sort_field:
-            queryset = queryset.filter(dimming=sort_field.split('_')[-1])
-        elif 'owner' in sort_field:
-            queryset = queryset.filter(manufacturer_country=sort_field.split('_')[-1])
+            queryset = queryset.order_by("price")
+        elif sort_field == "created_at":
+            queryset = queryset.order_by("created_at")
+        elif sort_field == "name":
+            queryset = queryset.order_by("name")
+        elif "color" in sort_field:
+            queryset = queryset.filter(color=sort_field.split("=")[-1])
+        elif "dimming" in sort_field:
+            queryset = queryset.filter(dimming=sort_field.split("_")[-1])
+        elif "owner" in sort_field:
+            queryset = queryset.filter(manufacturer_country=sort_field.split("_")[-1])
 
     return queryset
 
@@ -154,9 +156,7 @@ def category_detail_view(request, slug):
     page = request.GET.get("page")
     products = paginator.get_page(page)
 
-    context = {
-        "products": products
-    }
+    context = {"products": products}
     return render(request, "app/categories.html", context)
 
 
@@ -173,7 +173,6 @@ def add_comment(request, product_slug):
 
 
 def product_view(request, product_slug):
-
     product = Product.objects.get(slug=product_slug)
     comments = product.comments.all()
 
@@ -189,10 +188,7 @@ def to_cart(request, product_id, action):
     product_msg = __make_product_variant_msg(request.POST)
     product = Product.objects.get(pk=product_id)
 
-    obj = MessageTelegram.objects.create(
-        product=product,
-        product_msg=product_msg
-    )
+    obj = MessageTelegram.objects.create(product=product, product_msg=product_msg)
     obj.save()
 
     if not request.user.is_authenticated:
@@ -208,23 +204,28 @@ def basket_view(request):
 
     print(cart_info)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         basket_msg = __make_basket_products_msg(request.POST)
         print(basket_msg)
         for product in cart_info["products"]:
-
             if request.user.is_authenticated:
                 message_tg = MessageTelegram.objects.filter(product_id=product.pk)
             else:
-                message_tg = MessageTelegram.objects.filter(product_id=product['pk'])
-            print([message_tg_obj.product_msg for message_tg_obj in message_tg if message_tg_obj.product_msg])
+                message_tg = MessageTelegram.objects.filter(product_id=product["pk"])
+            print(
+                [
+                    message_tg_obj.product_msg
+                    for message_tg_obj in message_tg
+                    if message_tg_obj.product_msg
+                ]
+            )
             pass
 
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
         "order": cart_info["order"],
-        "products": cart_info["products"]
+        "products": cart_info["products"],
     }
     return render(request, "app/basket.html", context)
 
@@ -236,10 +237,8 @@ def send_phone_number_to_telegram(request):
 """
     req.post(
         settings.CHANNEL_API_LINK.format(
-            token=settings.BOT_TOKEN,
-            channel_id=settings.CHANNEL_ID,
-            text=msg
+            token=settings.BOT_TOKEN, channel_id=settings.CHANNEL_ID, text=msg
         )
     )
 
-    return redirect('home')
+    return redirect("home")

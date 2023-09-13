@@ -1,15 +1,14 @@
-
-
-<section class="roll-curtains">
-    <div class="container">
-        <h2 class="roll-curtains__title">Руллонные Шторы</h2>
+{% for category in categories %}
+  {% if category.categories.all %}
+    <section class="roll-curtains" style="margin-bottom: 30px;">
+      <div class="container">
+        <h2 class="roll-curtains__title">{{ category }}</h2>
         <div class="roll-curtains__content">
+          {% for product in category.categories.all %}
             {% include 'components/common/_card.html' %}
-            {% include 'components/common/_card.html' %}
-            {% include 'components/common/_card.html' %}
-            {% include 'components/common/_card.html' %}
-            {% include 'components/common/_card.html' %}
-            {% include 'components/common/_card.html' %}
+          {% endfor %}
         </div>
-    </div>
-</section>
+      </div>
+    </section>
+  {% endif %}
+{% endfor %}

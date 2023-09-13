@@ -2,41 +2,35 @@
 {% load static %}
 
 {% block title %}
-    Главная страница
-{% endblock title %}
-
+  Главная страница
+{% endblock %}
 
 {% block content %}
-    {#  best-curtains start #}
-    {% include 'app/components/index/_best-curtains.html' %}
-    {#  best-curtains end #}
+  {# best-curtains start #}
+  {% include 'app/components/index/_best-curtains.html' %}
+  {# best-curtains end #}
 
-    {# roll-curtains start #}
-    {% include 'app/components/index/_roll-curtains.html' %}
-    {# roll-curtains end #}
+  {# roll-curtains start #}
+  {% include 'app/components/index/_roll-curtains.html' %}
+  {# roll-curtains end #}
 
-    {# roll-curtains-extra start #}
-    {% include 'app/components/index/_roll-curtains-extra.html' %}
-    {# roll-curtains-extra end #}
+  {# cassette-combo start #}
+  {% include 'app/components/index/_cassette-combo.html' %}
+  {# cassette-combo end #}
 
-    {# cassette-combo start #}
-    {% include 'app/components/index/_cassette-combo.html' %}
-    {# cassette-combo end #}
+  {# gallery-projects start #}
+  {% include 'app/components/index/_projects-gallery.html' %}
+  {# gallery-projects end #}
 
-    {# gallery-projects start #}
-    {% include 'app/components/index/_projects-gallery.html' %}
-    {# gallery-projects end #}
+  {# have-questions start #}
+  {% include 'app/components/index/_have-questions.html' %}
+  {# have-questions end #}
 
-    {# have-questions start #}
-    {% include 'app/components/index/_have-questions.html' %}
-    {# have-questions end #}
+  {# reviews start #}
+  {% include 'app/components/index/_reviews.html' %}
+  {# reviews end #}
 
-    {# reviews start #}
-    {% include 'app/components/index/_reviews.html' %}
-    {# reviews end #}
-
-    {# feedback start #}
-    {% include 'app/components/index/_feedback.html' %}
-    {# feedback end #}
-
-{% endblock content %}
+  {# feedback start #}
+  {% include 'app/components/index/_feedback.html' %}
+  {# feedback end #}
+{% endblock %}

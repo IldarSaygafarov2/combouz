@@ -6,39 +6,34 @@ class CartForAuthenticatedUser:
     def __init__(self, request, product_id=None, action=None):
         self.user = request.user
 
-        if action == 'delete_product':
+        if action == "delete_product":
             self.delete_order_product(product_id)
 
         if product_id and action:
             self.add_or_delete(product_id, action)
 
     def get_cart_info(self):
-        customer, created = Customer.objects.get_or_create(
-            user=self.user
-        )
-        order, created = Order.objects.get_or_create(
-            user=customer
-        )
+        customer, created = Customer.objects.get_or_create(user=self.user)
+        order, created = Order.objects.get_or_create(user=customer)
         order_products = order.orderproduct_set.all()
         cart_total_quantity = order.get_cart_total_quantity
         cart_total_price = order.get_cart_total_price
 
         return {
-            'cart_total_quantity': cart_total_quantity,
-            'cart_total_price': cart_total_price,
-            'order': order,
-            'products': order_products
+            "cart_total_quantity": cart_total_quantity,
+            "cart_total_price": cart_total_price,
+            "order": order,
+            "products": order_products,
         }
 
     def add_or_delete(self, product_id, action):
-        order = self.get_cart_info()['order']
+        order = self.get_cart_info()["order"]
         product = Product.objects.get(pk=product_id)
         order_product, created = OrderProduct.objects.get_or_create(
-            order=order,
-            product=product
+            order=order, product=product
         )
 
-        if action == 'add' and product.quantity > 0:
+        if action == "add" and product.quantity > 0:
             order_product.quantity += 1  # +1 в корзину
             product.quantity -= 1  # -1 со склада
         else:
@@ -54,16 +49,13 @@ class CartForAuthenticatedUser:
         order = self.get_cart_info()["order"]
         product = Product.objects.get(pk=product_id)
 
-        order_product = OrderProduct.objects.get(
-            order=order,
-            product=product
-        )
+        order_product = OrderProduct.objects.get(order=order, product=product)
 
         order_product.delete()
         order.save()
 
     def clear(self):
-        order = self.get_cart_info()['order']
+        order = self.get_cart_info()["order"]
         order_products = order.orderproduct_set.all()
         for product in order_products:
             product.delete()
@@ -99,10 +91,7 @@ class CartForAnonymousUser:
 
     def get_cart_info(self):
         products = []
-        order = {
-            "get_cart_total_price": 0,
-            "get_cart_total_quantity": 0
-        }
+        order = {"get_cart_total_price": 0, "get_cart_total_quantity": 0}
         cart_total_quantity = order["get_cart_total_quantity"]
         cart_total_price = order["get_cart_total_price"]
         for key in self.cart:
@@ -120,10 +109,10 @@ class CartForAnonymousUser:
                         "price": product.price,
                         "get_first_photo": product.get_first_photo(),
                         "quantity": product.quantity,
-                        "get_absolute_url": product.get_absolute_url()
+                        "get_absolute_url": product.get_absolute_url(),
                     },
                     "quantity": product_quantity,
-                    "get_total_price": get_total_price
+                    "get_total_price": get_total_price,
                 }
                 products.append(cart_product)
                 order["get_cart_total_price"] += cart_product["get_total_price"]
@@ -136,16 +125,14 @@ class CartForAnonymousUser:
             "cart_total_quantity": cart_total_quantity,
             "cart_total_price": cart_total_price,
             "order": order,
-            "products": products
+            "products": products,
         }
 
     def add(self):
         if self.cart_product:
             self.cart_product["quantity"] += 1
         else:
-            self.cart[self.key] = {
-                "quantity": 1
-            }
+            self.cart[self.key] = {"quantity": 1}
         self.product.quantity -= 1
 
     def delete(self):
@@ -171,5 +158,5 @@ def get_cart_data(request):
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
         "order": cart_info["order"],
-        "products": cart_info["products"]
+        "products": cart_info["products"],
     }

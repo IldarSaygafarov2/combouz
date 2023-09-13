@@ -28,6 +28,15 @@ class CustomUser(AbstractUser):
 class Category(models.Model):
     name = models.CharField(verbose_name="Категория", max_length=155)
     slug = models.SlugField(verbose_name="Слаг", default="")
+    show_on_homepage = models.BooleanField(
+        verbose_name="Показывать на главной странице",
+        default=False,
+    )
+    show_as_bestseller = models.BooleanField(
+        verbose_name="Сделать самым продоваемым",
+        default=False,
+        help_text="При выборе, добавит все товары данной категории на главную в раздел самых продоваемых товаров",
+    )
 
     def get_absolute_url(self):
         return reverse("category_detail", kwargs={"slug": self.slug})
@@ -45,42 +54,68 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    SIZE_CHOICES = [
-        (f'{i} мм', f'{i} мм')
-        for i in range(1, 30)
-    ]
+    SIZE_CHOICES = [(f"{i} мм", f"{i} мм") for i in range(1, 30)]
 
-    QUANTITY_CHOICES = [
-        (i, i)
-        for i in range(1, 30)
-    ]
+    QUANTITY_CHOICES = [(i, i) for i in range(1, 30)]
     CORNICE_TYPE_CHOICES = [
-        ('Алюминевый', 'Алюминевый'),
-        ('Пластиковый', 'Пластиковый')
+        ("Алюминевый", "Алюминевый"),
+        ("Пластиковый", "Пластиковый"),
     ]
 
     CONTROL_TYPE_CHOICES = [
-        ('Ручной', 'Ручной'),
-        ('С электроприводом', 'С электроприводом'),
+        ("Ручной", "Ручной"),
+        ("С электроприводом", "С электроприводом"),
     ]
 
     name = models.CharField(verbose_name="Название товара", unique=True, max_length=155)
     width = models.CharField(verbose_name="Ширина", max_length=15, choices=SIZE_CHOICES)
-    height = models.CharField(verbose_name="Высота", max_length=15, choices=SIZE_CHOICES)
-    is_left_control = models.BooleanField(verbose_name="Управление слева?", default=False, blank=True)
-    is_right_control = models.BooleanField(verbose_name="Управление Справа?", default=False, blank=True)
+    height = models.CharField(
+        verbose_name="Высота",
+        max_length=15,
+        choices=SIZE_CHOICES,
+    )
+    is_left_control = models.BooleanField(
+        verbose_name="Управление слева?",
+        default=False,
+        blank=True,
+    )
+    is_right_control = models.BooleanField(
+        verbose_name="Управление Справа?",
+        default=False,
+        blank=True,
+    )
     quantity = models.IntegerField(verbose_name="Количество", choices=QUANTITY_CHOICES)
-    cornice_type = models.CharField(blank=True, choices=CORNICE_TYPE_CHOICES, max_length=50)
-    control_type = models.CharField(blank=True, choices=CONTROL_TYPE_CHOICES, max_length=50)
-    manufacturer_country = models.CharField(verbose_name="Страна производитель", max_length=150)
+    cornice_type = models.CharField(
+        blank=True,
+        choices=CORNICE_TYPE_CHOICES,
+        max_length=50,
+    )
+    control_type = models.CharField(
+        blank=True,
+        choices=CONTROL_TYPE_CHOICES,
+        max_length=50,
+    )
+    manufacturer_country = models.CharField(
+        verbose_name="Страна производитель",
+        max_length=150,
+    )
     fabric_type = models.CharField(verbose_name="Тип ткани", max_length=150)
     property = models.CharField(verbose_name="Свойство", max_length=100)
     dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
     price = models.SmallIntegerField(verbose_name="Цена", default=0)
     description = models.TextField(verbose_name="Описание продукта")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories", default=None)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="categories",
+        default=None,
+    )
     slug = models.SlugField(default="")
-    created_at = models.DateTimeField(verbose_name="Дата добавления", auto_now_add=True, null=True)
+    created_at = models.DateTimeField(
+        verbose_name="Дата добавления",
+        auto_now_add=True,
+        null=True,
+    )
     color = models.CharField(verbose_name="Цвет", max_length=100, default="")
     discount = models.IntegerField(verbose_name="Размер скидки", blank=True, null=True)
 
@@ -103,13 +138,17 @@ class Product(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Продукт'
-        verbose_name_plural = 'Продукты'
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
 
 
 class ProductOption(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_options")
-    option_main = models.CharField(verbose_name="Главная характеристика", max_length=200)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="product_options"
+    )
+    option_main = models.CharField(
+        verbose_name="Главная характеристика", max_length=200
+    )
     option_additional = models.TextField(verbose_name="Описание характеристики")
 
     def __str__(self):
@@ -120,14 +159,18 @@ class ProductImage(models.Model):
     def make_folder_path(self, filename):
         return f"photos/products/{filename}"
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="images"
+    )
     photo = models.ImageField(verbose_name="Фото", upload_to=make_folder_path)
 
 
 class ProjectsGallery(models.Model):
     title = models.CharField(verbose_name="Заголовок проекта", max_length=255)
     subtitle = models.CharField(verbose_name="Подзаголовок проекта", max_length=255)
-    photo = models.ImageField(verbose_name="Фото проекта", upload_to="gallery/projects/", default="")
+    photo = models.ImageField(
+        verbose_name="Фото проекта", upload_to="gallery/projects/", default=""
+    )
 
     def __str__(self):
         return f"{self.title}: {self.subtitle}"
@@ -150,8 +193,12 @@ class Client(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="comments")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="comments"
+    )
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="comments"
+    )
     body = models.TextField(verbose_name="Текст комментария")
 
     def __str__(self):
@@ -159,7 +206,9 @@ class Comment(models.Model):
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.SET_NULL, blank=True, null=True
+    )
     first_name = models.CharField(verbose_name="Имя", max_length=150)
     last_name = models.CharField(verbose_name="Фамилия", max_length=150)
     email = models.EmailField(verbose_name="Почта")
@@ -168,7 +217,9 @@ class Customer(models.Model):
     address = models.CharField(verbose_name="Адрес", max_length=255)
     comment = models.CharField(verbose_name="Комментарий", max_length=1000, default="")
     delivery_type = models.CharField(verbose_name="Тип доставки", max_length=150)
-    delivery_option = models.CharField(verbose_name="Вариант доставки", max_length=150, default="")
+    delivery_option = models.CharField(
+        verbose_name="Вариант доставки", max_length=150, default=""
+    )
 
     def __str__(self):
         return self.first_name
@@ -191,7 +242,9 @@ class Order(models.Model):
 
 
 class OrderProduct(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="order_products")
+    product = models.ForeignKey(
+        Product, on_delete=models.SET_NULL, null=True, related_name="order_products"
+    )
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0)
     added_at = models.DateTimeField(auto_now_add=True)
@@ -204,8 +257,12 @@ class OrderProduct(models.Model):
 class Feedback(models.Model):
     body = models.TextField(verbose_name="Текст отзыва")
     feedback_author = models.CharField(verbose_name="Имя автора отзыва", max_length=255)
-    author_company = models.CharField(verbose_name="Компания автора отзыва", max_length=255)
-    avatar = models.ImageField(verbose_name="Фото автора отзыва", upload_to="feedback/author/")
+    author_company = models.CharField(
+        verbose_name="Компания автора отзыва", max_length=255
+    )
+    avatar = models.ImageField(
+        verbose_name="Фото автора отзыва", upload_to="feedback/author/"
+    )
 
     def __str__(self):
         return f"{self.feedback_author}: {self.body[:100]}..."
@@ -216,8 +273,10 @@ class Feedback(models.Model):
 
 
 class FAQ(models.Model):
-    youtube_video_url = models.URLField(verbose_name="Ссылка на видео",
-                                        help_text="Нужно поставить ссылку из встраивания видео с ютуба")
+    youtube_video_url = models.URLField(
+        verbose_name="Ссылка на видео",
+        help_text="Нужно поставить ссылку из встраивания видео с ютуба",
+    )
 
     class Meta:
         verbose_name = "Вопрос"
@@ -229,5 +288,3 @@ class MessageTelegram(models.Model):
     order = models.ForeignKey(Order, on_delete=models.DO_NOTHING, null=True, blank=True)
     product_msg = models.TextField(blank=True, null=True)
     basket_msg = models.TextField(blank=True, null=True)
-
-

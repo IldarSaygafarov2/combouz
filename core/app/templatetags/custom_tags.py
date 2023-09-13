@@ -15,6 +15,7 @@ def get_cart_total_qty(request):
 @register.simple_tag()
 def get_config():
     from constance import config
+
     return config
 
 
@@ -26,13 +27,13 @@ def get_categories():
 
 @register.simple_tag()
 def is_category_selected(category, path):
-    slug_from_path = [item for item in path.split('/') if item][-1]
+    slug_from_path = [item for item in path.split("/") if item][-1]
     return category.slug == slug_from_path
 
 
 @register.simple_tag()
 def is_page_sorted(sort_field, request):
-    return sort_field == request.GET.get('sort')
+    return sort_field == request.GET.get("sort")
 
 
 @register.simple_tag()
@@ -50,3 +51,17 @@ def get_unique_elements(sort_field):
             if product.manufacturer_country not in result:
                 result.append(product.manufacturer_country)
     return result
+
+
+@register.simple_tag()
+def convert_price(product: Product):
+    import requests
+
+    API_KEY = "0a1fb85a88eafb2934c0bae7"
+
+    url = f"https://v6.exchangerate-api.com/v6/{API_KEY}/latest/USD"
+    resp = requests.get(url).json()
+
+    uzs = resp["conversion_rates"]["UZS"]
+    price = f"{round(product.price * uzs):,d}".replace(",", " ")
+    return price

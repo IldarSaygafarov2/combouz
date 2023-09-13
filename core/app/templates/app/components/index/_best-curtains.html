@@ -1,21 +1,14 @@
-{% load static %}
+{% load static custom_tags %}
+{% get_config as config %}
 
 <section class="best-curtains">
-    <div class="container">
-        <div class="best-curtains__content">
-            <div class="best-curtains__text">
-                <h1 class="best-curtains__title">Лучшие шторы на рынке Узбекистана</h1>
-                <p class="best-curtains__descr">
-                    Lorem ipsum dolor sit amet consectetur. Facilisis aliquet volutpat
-                    egestas non ipsum phasellus ac. Senectus malesuada lacinia dictum
-                    elementum eu vel lacus quam nulla
-                </p>
-            </div>
-        </div>
-        <img
-                class="best-curtains__background"
-                src="{% static 'images/main-page/best-curtains.png' %}"
-                alt="best curtains in Uzbekistan Combo.uz"
-        />
+  <div class="container">
+    <div class="best-curtains__content">
+      <div class="best-curtains__text">
+        <h1 class="best-curtains__title">{{ config.HOMEPAGE_HERO_TITLE }}</h1>
+        <p class="best-curtains__descr">{{ config.HOMEPAGE_HERO_DESCRIPTION }}</p>
+      </div>
     </div>
+    <img class="best-curtains__background" src="{% static 'images/main-page/best-curtains.png' %}" alt="{{ config.HOMEPAGE_HERO_TITLE }} Combo.uz" />
+  </div>
 </section>
