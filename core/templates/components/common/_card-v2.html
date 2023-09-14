@@ -1,5 +1,6 @@
-{% load static %}
+{% load static custom_tags %}
 
+{% convert_price product.price as product_price %}
 
 <div class="cassette-combo__item">
     <div class="cassette-combo__content">
@@ -12,7 +13,7 @@
                 <li class="cassette-combo__elem">Тип ткани: {{ product.fabric_type }}</li>
                 <li class="cassette-combo__elem">Свойство: {{ product.property }}</li>
                 <li class="cassette-combo__elem">Затемнение: {{ product.dimming }}%</li>
-                <li class="cassette-combo__elem">Цена: {{ product.price }} сум за 1 м2</li>
+                <li class="cassette-combo__elem">Цена: {{ product_price }} сум за 1 м2</li>
             </ul>
         </div>
     </div>

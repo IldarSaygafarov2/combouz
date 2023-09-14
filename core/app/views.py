@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 
 from core import settings
-
 from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
 from .forms import CommentForm, CustomUserAuthenticationForm, CustomUserCreationForm
 from .models import (
@@ -30,13 +29,14 @@ CORNICE_TYPES = {"aluminium": "Алюминевый", "plastic": "Пластик
 CONTROL_TYPES = {"manual": "Ручной", "electro": "С электроприводом"}
 
 
-def __make_product_variant_msg(product_data):
+def __make_product_variant_msg(product_data, product_name):
     if not product_data:
         return
 
     print(product_data.values())
 
     return f"""
+Название продукта: {product_name}
 Ширина: {product_data['item-width']}
 Длина: {product_data['item-length']}
 Управление: {'Слева' if product_data['item-control'] == 'left' else 'Справа'}
@@ -118,7 +118,6 @@ def user_logout(request):
 def about_view(request):
     gallery_projects = ProjectsGallery.objects.all()
     clients = Client.objects.all()
-
     context = {"gallery_projects": gallery_projects, "clients": clients}
     return render(request, "app/about.html", context)
 
@@ -185,8 +184,8 @@ def product_view(request, product_slug):
 
 
 def to_cart(request, product_id, action):
-    product_msg = __make_product_variant_msg(request.POST)
     product = Product.objects.get(pk=product_id)
+    product_msg = __make_product_variant_msg(request.POST)
 
     obj = MessageTelegram.objects.create(product=product, product_msg=product_msg)
     obj.save()
@@ -202,30 +201,37 @@ def to_cart(request, product_id, action):
 def basket_view(request):
     cart_info = get_cart_data(request)
 
-    print(cart_info)
-
     if request.method == "POST":
         basket_msg = __make_basket_products_msg(request.POST)
-        print(basket_msg)
+
         for product in cart_info["products"]:
             if request.user.is_authenticated:
                 message_tg = MessageTelegram.objects.filter(product_id=product.pk)
             else:
                 message_tg = MessageTelegram.objects.filter(product_id=product["pk"])
-            print(
-                [
-                    message_tg_obj.product_msg
-                    for message_tg_obj in message_tg
-                    if message_tg_obj.product_msg
-                ]
-            )
-            pass
 
+            basket_msg += ''.join([
+                message_tg_obj.product_msg
+                for message_tg_obj in message_tg
+                if message_tg_obj.product_msg
+            ])
+            req.post(
+                settings.CHANNEL_API_LINK.format(
+                    token=settings.BOT_TOKEN,
+                    channel_id=settings.CHANNEL_ID,
+                    text=basket_msg
+                )
+            )
+
+    category = cart_info['products'].last().product.category
+    last_product = cart_info['products'].last().product
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
         "order": cart_info["order"],
         "products": cart_info["products"],
+        "category": category,
+        "last_product": last_product,
     }
     return render(request, "app/basket.html", context)
 

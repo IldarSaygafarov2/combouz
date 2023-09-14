@@ -1,14 +1,14 @@
 {% for category in categories %}
-  {% if category.categories.all %}
+    {% if category.categories.all %}
     <section class="roll-curtains" style="margin-bottom: 30px;">
-      <div class="container">
-        <h2 class="roll-curtains__title">{{ category }}</h2>
-        <div class="roll-curtains__content">
-          {% for product in category.categories.all %}
-            {% include 'components/common/_card.html' %}
-          {% endfor %}
+        <div class="container">
+            <h2 class="roll-curtains__title">{{ category }}</h2>
+            <div class="roll-curtains__content">
+                {% for product in category.categories.all %}
+                {% include 'components/common/_card.html' %}
+                {% endfor %}
+            </div>
         </div>
-      </div>
     </section>
-  {% endif %}
+    {% endif %}
 {% endfor %}

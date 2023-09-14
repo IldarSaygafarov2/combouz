@@ -2,60 +2,60 @@
 {% load static %}
 
 {% block title %}
-    Корзина
+Корзина
 {% endblock title %}
 
 
 {% block content %}
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="breadcrumbs__content">
-                <div class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="{% url 'home' %}">
-                        <span>Главная</span>
-                        <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="">
-                    </a>
-                </div>
-                <div class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="#!">
-                        <span>Руллоные шторы</span>
-                        <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="">
-                    </a>
-                </div>
-                <div class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="#!">
-                        <span>NEW O V - 33</span>
-                        <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="">
-                    </a>
-                </div>
-                <div class="breadcrumbs__item">
-                    <span class="breadcrumbs__line"></span>
-                    <a class="breadcrumbs__link active" href="#!">
-                        <span>Корзина</span>
-                    </a>
-                </div>
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs__content">
+            <div class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{% url 'home' %}">
+                    <span>Главная</span>
+                    <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="">
+                </a>
+            </div>
+            <div class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{{ category.get_absolute_url }}">
+                    <span>{{ category }}</span>
+                    <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="">
+                </a>
+            </div>
+            <div class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{{ last_product.get_absolute_url }}">
+                    <span>{{ last_product }}</span>
+                    <img src="{% static 'images/icons/arrow-right-light.svg' %}" alt="">
+                </a>
+            </div>
+            <div class="breadcrumbs__item">
+                <span class="breadcrumbs__line"></span>
+                <a class="breadcrumbs__link active" href="#!">
+                    <span>Корзина</span>
+                </a>
             </div>
         </div>
     </div>
-    {% if products %}
-        <form class="busket" action="{% url 'cart' %}" method="POST">
-            {% csrf_token %}
-            <div class="container">
-                {% include 'app/components/basket/_basket-top.html' %}
-            </div>
+</div>
+{% if products %}
+<form class="busket" action="{% url 'cart' %}" method="POST">
+    {% csrf_token %}
+    <div class="container">
+        {% include 'app/components/basket/_basket-top.html' %}
+    </div>
 
-            {% include 'app/components/basket/_basket-form.html' %}
-        </form>
-    {% else %}
-        <div class="container">
-            <h1>Корзина пуста</h1>
-        </div>
-    {% endif %}
-    <div class="busket-modal">
-        <div class="busket-modal__content">
-            <p class="busket-modal__descr">С вами свяжутся в ближайшее время</p>
-            <button class="busket-modal__close"><img src="{% static 'images/icons/close.svg' %}" alt="close icon">
-            </button>
-        </div>
+    {% include 'app/components/basket/_basket-form.html' %}
+</form>
+{% else %}
+<div class="container">
+    <h1>Корзина пуста</h1>
+</div>
+{% endif %}
+<div class="busket-modal">
+    <div class="busket-modal__content">
+        <p class="busket-modal__descr">С вами свяжутся в ближайшее время</p>
+        <button class="busket-modal__close"><img src="{% static 'images/icons/close.svg' %}" alt="close icon">
+        </button>
     </div>
+</div>
 {% endblock content %}

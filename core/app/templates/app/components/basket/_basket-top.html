@@ -1,4 +1,6 @@
-{% load static %}
+{% load static custom_tags %}
+
+
 
 <div class="busket-top">
     <div class="busket-top__sep">
@@ -14,6 +16,7 @@
         </div>
         <div class="busket-top__items">
             {% for cart_product in products %}
+                {% convert_price cart_product.product.price as product_price %}
                 <div class="busket-top__elem">
                     <p class="busket-top__name">{{ cart_product.product.name }}</p>
                     <div class="busket-top__controls">
@@ -25,8 +28,9 @@
                             <img src="{% static 'images/icons/plus.svg' %}" alt="">
                         </a>
                     </div>
-                    <p class="busket-top__control price">{{ cart_product.product.price }} сум</p>
-                    <p class="busket-top__control total">{{ cart_product.get_total_price }} сум</p>
+                    {% convert_price cart_product.get_total_price as product_total_price %}
+                    <p class="busket-top__control price">{{ product_price }} сум</p>
+                    <p class="busket-top__control total">{{ product_total_price }} сум</p>
                     <a class="busket-top__remove" href="{% url 'to_cart' cart_product.product.pk 'delete_product' %}">
                         <img src="{% static 'images/icons/trash.svg' %}" alt="remove item icon">
                     </a>

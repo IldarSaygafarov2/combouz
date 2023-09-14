@@ -4,6 +4,7 @@ from django.templatetags.static import static
 from django.urls import reverse
 
 from .managers import CustomUserManager
+from helpers.functions import convert_price
 
 
 class CustomUser(AbstractUser):
@@ -233,7 +234,8 @@ class Order(models.Model):
     @property
     def get_cart_total_price(self):
         order_products = self.orderproduct_set.all()
-        return sum([item.get_total_price for item in order_products])
+        total = sum([item.get_total_price for item in order_products])
+        return convert_price(total)
 
     @property
     def get_cart_total_quantity(self):

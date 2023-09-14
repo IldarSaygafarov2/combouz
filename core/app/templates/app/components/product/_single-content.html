@@ -1,3 +1,7 @@
+{% load custom_tags %}
+
+{% convert_price product.price as product_price %}
+
 <div class="single__content">
     <ul class="single__content-features">
         <li class="single__content-elem">Страна производитель: {{ product.manufacturer_country }}</li>
@@ -5,7 +9,7 @@
         <li class="single__content-elem">Свойство: {{ product.property }}</li>
         <li class="single__content-elem">Затемнение: {{ product.dimming }}%</li>
     </ul>
-    <h4 class="single__content-price">Цена: {{ product.price }} сум за 1 м2</h4>
+    <h4 class="single__content-price">Цена: {{ product_price }} сум за 1 м2</h4>
     <p class="single__content-info">{{ product.description }}</p>
     <h3 class="single__content-characters">Характеристики</h3>
 

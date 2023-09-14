@@ -3,9 +3,9 @@
     "model": "admin.logentry",
     "pk": 1,
     "fields": {
-      "action_time": "2023-08-19T19:56:56.944Z",
+      "action_time": "2023-09-14T09:31:05.827Z",
       "user": 1,
-      "content_type": 6,
+      "content_type": 7,
       "object_id": "1",
       "object_repr": "На пластиковые окна",
       "action_flag": 1,
@@ -16,9 +16,9 @@
     "model": "admin.logentry",
     "pk": 2,
     "fields": {
-      "action_time": "2023-08-19T19:57:02.935Z",
+      "action_time": "2023-09-14T09:31:12.997Z",
       "user": 1,
-      "content_type": 6,
+      "content_type": 7,
       "object_id": "2",
       "object_repr": "Руллонные",
       "action_flag": 1,
@@ -29,9 +29,9 @@
     "model": "admin.logentry",
     "pk": 3,
     "fields": {
-      "action_time": "2023-08-19T19:57:08.122Z",
+      "action_time": "2023-09-14T09:31:17.520Z",
       "user": 1,
-      "content_type": 6,
+      "content_type": 7,
       "object_id": "3",
       "object_repr": "Вертикальные",
       "action_flag": 1,
@@ -42,9 +42,9 @@
     "model": "admin.logentry",
     "pk": 4,
     "fields": {
-      "action_time": "2023-08-19T19:57:11.976Z",
+      "action_time": "2023-09-14T09:31:24.221Z",
       "user": 1,
-      "content_type": 6,
+      "content_type": 7,
       "object_id": "4",
       "object_repr": "День-Ночь",
       "action_flag": 1,
@@ -55,9 +55,9 @@
     "model": "admin.logentry",
     "pk": 5,
     "fields": {
-      "action_time": "2023-08-19T19:57:16.606Z",
+      "action_time": "2023-09-14T09:31:30.872Z",
       "user": 1,
-      "content_type": 6,
+      "content_type": 7,
       "object_id": "5",
       "object_repr": "Плиссе",
       "action_flag": 1,
@@ -68,13 +68,195 @@
     "model": "admin.logentry",
     "pk": 6,
     "fields": {
-      "action_time": "2023-08-19T19:57:20.910Z",
+      "action_time": "2023-09-14T09:31:36.314Z",
       "user": 1,
-      "content_type": 6,
+      "content_type": 7,
       "object_id": "6",
       "object_repr": "Шторы",
       "action_flag": 1,
       "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2023-09-14T09:32:04.968Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "Руллонные",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c \\u043d\\u0430 \\u0433\\u043b\\u0430\\u0432\\u043d\\u043e\\u0439 \\u0441\\u0442\\u0440\\u0430\\u043d\\u0438\\u0446\\u0435\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2023-09-14T09:37:01.911Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "1",
+      "object_repr": "Товар для Рулонных штор",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"product option\", \"object\": \"\\u0422\\u043e\\u0432\\u0430\\u0440 \\u0434\\u043b\\u044f \\u0420\\u0443\\u043b\\u043e\\u043d\\u043d\\u044b\\u0445 \\u0448\\u0442\\u043e\\u0440: \\u0444\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"ProductImage object (1)\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"ProductImage object (2)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2023-09-14T09:38:13.412Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "1",
+      "object_repr": "Очень крутые шторы: Супер крутые шторы",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2023-09-14T09:40:56.642Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "1",
+      "object_repr": "FAQ object (1)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2023-09-14T09:40:58.940Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "2",
+      "object_repr": "FAQ object (2)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+      "action_time": "2023-09-14T09:40:59.966Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "3",
+      "object_repr": "FAQ object (3)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+      "action_time": "2023-09-14T09:41:56.772Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "1",
+      "object_repr": "Автор 1: Отзыв 1...",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+      "action_time": "2023-09-14T09:42:13.492Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "Автор 2: Отзыв 2...",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+      "action_time": "2023-09-14T09:42:28.591Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "3",
+      "object_repr": "Автор 3: Отзыв 3...",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+      "action_time": "2023-09-14T09:43:15.966Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "1",
+      "object_repr": "Автор 1: Отзыв 1...",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u0442\\u043e \\u0430\\u0432\\u0442\\u043e\\u0440\\u0430 \\u043e\\u0442\\u0437\\u044b\\u0432\\u0430\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+      "action_time": "2023-09-14T09:43:21.771Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "Автор 2: Отзыв 2...",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u0442\\u043e \\u0430\\u0432\\u0442\\u043e\\u0440\\u0430 \\u043e\\u0442\\u0437\\u044b\\u0432\\u0430\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+      "action_time": "2023-09-14T09:43:27.561Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "3",
+      "object_repr": "Автор 3: Отзыв 3...",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+      "action_time": "2023-09-14T09:43:45.475Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "3",
+      "object_repr": "Автор 3: Отзыв 3...",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u0442\\u043e \\u0430\\u0432\\u0442\\u043e\\u0440\\u0430 \\u043e\\u0442\\u0437\\u044b\\u0432\\u0430\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+      "action_time": "2023-09-14T10:38:41.758Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "Руллонные",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u0434\\u0435\\u043b\\u0430\\u0442\\u044c \\u0441\\u0430\\u043c\\u044b\\u043c \\u043f\\u0440\\u043e\\u0434\\u043e\\u0432\\u0430\\u0435\\u043c\\u044b\\u043c\"]}}]"
     }
   },
   {
@@ -261,180 +443,774 @@
     "model": "auth.permission",
     "pk": 21,
     "fields": {
-      "name": "Can add Категория",
+      "name": "Can add Пользовать",
       "content_type": 6,
-      "codename": "add_category"
+      "codename": "add_customuser"
     }
   },
   {
     "model": "auth.permission",
     "pk": 22,
     "fields": {
-      "name": "Can change Категория",
+      "name": "Can change Пользовать",
       "content_type": 6,
-      "codename": "change_category"
+      "codename": "change_customuser"
     }
   },
   {
     "model": "auth.permission",
     "pk": 23,
     "fields": {
-      "name": "Can delete Категория",
+      "name": "Can delete Пользовать",
       "content_type": 6,
-      "codename": "delete_category"
+      "codename": "delete_customuser"
     }
   },
   {
     "model": "auth.permission",
     "pk": 24,
     "fields": {
-      "name": "Can view Категория",
+      "name": "Can view Пользовать",
       "content_type": 6,
-      "codename": "view_category"
+      "codename": "view_customuser"
     }
   },
   {
     "model": "auth.permission",
     "pk": 25,
     "fields": {
-      "name": "Can add Продукт",
+      "name": "Can add Категория",
       "content_type": 7,
-      "codename": "add_product"
+      "codename": "add_category"
     }
   },
   {
     "model": "auth.permission",
     "pk": 26,
     "fields": {
-      "name": "Can change Продукт",
+      "name": "Can change Категория",
       "content_type": 7,
-      "codename": "change_product"
+      "codename": "change_category"
     }
   },
   {
     "model": "auth.permission",
     "pk": 27,
     "fields": {
-      "name": "Can delete Продукт",
+      "name": "Can delete Категория",
       "content_type": 7,
-      "codename": "delete_product"
+      "codename": "delete_category"
     }
   },
   {
     "model": "auth.permission",
     "pk": 28,
     "fields": {
-      "name": "Can view Продукт",
+      "name": "Can view Категория",
       "content_type": 7,
-      "codename": "view_product"
+      "codename": "view_category"
     }
   },
   {
     "model": "auth.permission",
     "pk": 29,
     "fields": {
-      "name": "Can add product option",
+      "name": "Can add Клиент",
       "content_type": 8,
-      "codename": "add_productoption"
+      "codename": "add_client"
     }
   },
   {
     "model": "auth.permission",
     "pk": 30,
     "fields": {
-      "name": "Can change product option",
+      "name": "Can change Клиент",
       "content_type": 8,
-      "codename": "change_productoption"
+      "codename": "change_client"
     }
   },
   {
     "model": "auth.permission",
     "pk": 31,
     "fields": {
-      "name": "Can delete product option",
+      "name": "Can delete Клиент",
       "content_type": 8,
-      "codename": "delete_productoption"
+      "codename": "delete_client"
     }
   },
   {
     "model": "auth.permission",
     "pk": 32,
     "fields": {
-      "name": "Can view product option",
+      "name": "Can view Клиент",
       "content_type": 8,
-      "codename": "view_productoption"
+      "codename": "view_client"
     }
   },
   {
     "model": "auth.permission",
     "pk": 33,
     "fields": {
-      "name": "Can add product image",
+      "name": "Can add customer",
       "content_type": 9,
-      "codename": "add_productimage"
+      "codename": "add_customer"
     }
   },
   {
     "model": "auth.permission",
     "pk": 34,
     "fields": {
-      "name": "Can change product image",
+      "name": "Can change customer",
       "content_type": 9,
-      "codename": "change_productimage"
+      "codename": "change_customer"
     }
   },
   {
     "model": "auth.permission",
     "pk": 35,
     "fields": {
-      "name": "Can delete product image",
+      "name": "Can delete customer",
       "content_type": 9,
-      "codename": "delete_productimage"
+      "codename": "delete_customer"
     }
   },
   {
     "model": "auth.permission",
     "pk": 36,
     "fields": {
-      "name": "Can view product image",
+      "name": "Can view customer",
       "content_type": 9,
-      "codename": "view_productimage"
+      "codename": "view_customer"
     }
   },
   {
     "model": "auth.permission",
     "pk": 37,
     "fields": {
-      "name": "Can add user",
+      "name": "Can add Вопрос",
       "content_type": 10,
-      "codename": "add_customuser"
+      "codename": "add_faq"
     }
   },
   {
     "model": "auth.permission",
     "pk": 38,
     "fields": {
-      "name": "Can change user",
+      "name": "Can change Вопрос",
       "content_type": 10,
-      "codename": "change_customuser"
+      "codename": "change_faq"
     }
   },
   {
     "model": "auth.permission",
     "pk": 39,
     "fields": {
-      "name": "Can delete user",
+      "name": "Can delete Вопрос",
       "content_type": 10,
-      "codename": "delete_customuser"
+      "codename": "delete_faq"
     }
   },
   {
     "model": "auth.permission",
     "pk": 40,
     "fields": {
-      "name": "Can view user",
+      "name": "Can view Вопрос",
       "content_type": 10,
-      "codename": "view_customuser"
+      "codename": "view_faq"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add Отзыв",
+      "content_type": 11,
+      "codename": "add_feedback"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change Отзыв",
+      "content_type": 11,
+      "codename": "change_feedback"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete Отзыв",
+      "content_type": 11,
+      "codename": "delete_feedback"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view Отзыв",
+      "content_type": 11,
+      "codename": "view_feedback"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add order",
+      "content_type": 12,
+      "codename": "add_order"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change order",
+      "content_type": 12,
+      "codename": "change_order"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete order",
+      "content_type": 12,
+      "codename": "delete_order"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view order",
+      "content_type": 12,
+      "codename": "view_order"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can add Продукт",
+      "content_type": 13,
+      "codename": "add_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can change Продукт",
+      "content_type": 13,
+      "codename": "change_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can delete Продукт",
+      "content_type": 13,
+      "codename": "delete_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view Продукт",
+      "content_type": 13,
+      "codename": "view_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+      "name": "Can add Проект",
+      "content_type": 14,
+      "codename": "add_projectsgallery"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+      "name": "Can change Проект",
+      "content_type": 14,
+      "codename": "change_projectsgallery"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+      "name": "Can delete Проект",
+      "content_type": 14,
+      "codename": "delete_projectsgallery"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+      "name": "Can view Проект",
+      "content_type": 14,
+      "codename": "view_projectsgallery"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+      "name": "Can add product option",
+      "content_type": 15,
+      "codename": "add_productoption"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+      "name": "Can change product option",
+      "content_type": 15,
+      "codename": "change_productoption"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+      "name": "Can delete product option",
+      "content_type": 15,
+      "codename": "delete_productoption"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+      "name": "Can view product option",
+      "content_type": 15,
+      "codename": "view_productoption"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 61,
+    "fields": {
+      "name": "Can add product image",
+      "content_type": 16,
+      "codename": "add_productimage"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 62,
+    "fields": {
+      "name": "Can change product image",
+      "content_type": 16,
+      "codename": "change_productimage"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 63,
+    "fields": {
+      "name": "Can delete product image",
+      "content_type": 16,
+      "codename": "delete_productimage"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 64,
+    "fields": {
+      "name": "Can view product image",
+      "content_type": 16,
+      "codename": "view_productimage"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 65,
+    "fields": {
+      "name": "Can add order product",
+      "content_type": 17,
+      "codename": "add_orderproduct"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 66,
+    "fields": {
+      "name": "Can change order product",
+      "content_type": 17,
+      "codename": "change_orderproduct"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 67,
+    "fields": {
+      "name": "Can delete order product",
+      "content_type": 17,
+      "codename": "delete_orderproduct"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 68,
+    "fields": {
+      "name": "Can view order product",
+      "content_type": 17,
+      "codename": "view_orderproduct"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 69,
+    "fields": {
+      "name": "Can add comment",
+      "content_type": 18,
+      "codename": "add_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 70,
+    "fields": {
+      "name": "Can change comment",
+      "content_type": 18,
+      "codename": "change_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 71,
+    "fields": {
+      "name": "Can delete comment",
+      "content_type": 18,
+      "codename": "delete_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 72,
+    "fields": {
+      "name": "Can view comment",
+      "content_type": 18,
+      "codename": "view_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 73,
+    "fields": {
+      "name": "Can add message telegram",
+      "content_type": 19,
+      "codename": "add_messagetelegram"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 74,
+    "fields": {
+      "name": "Can change message telegram",
+      "content_type": 19,
+      "codename": "change_messagetelegram"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 75,
+    "fields": {
+      "name": "Can delete message telegram",
+      "content_type": 19,
+      "codename": "delete_messagetelegram"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 76,
+    "fields": {
+      "name": "Can view message telegram",
+      "content_type": 19,
+      "codename": "view_messagetelegram"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 77,
+    "fields": {
+      "name": "Can add constance",
+      "content_type": 20,
+      "codename": "add_constance"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 78,
+    "fields": {
+      "name": "Can change constance",
+      "content_type": 20,
+      "codename": "change_constance"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 79,
+    "fields": {
+      "name": "Can delete constance",
+      "content_type": 20,
+      "codename": "delete_constance"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 80,
+    "fields": {
+      "name": "Can view constance",
+      "content_type": 20,
+      "codename": "view_constance"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 81,
+    "fields": {
+      "name": "Can change config",
+      "content_type": 20,
+      "codename": "change_config"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 82,
+    "fields": {
+      "name": "Can view config",
+      "content_type": 20,
+      "codename": "view_config"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 83,
+    "fields": {
+      "name": "Can add site",
+      "content_type": 21,
+      "codename": "add_site"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 84,
+    "fields": {
+      "name": "Can change site",
+      "content_type": 21,
+      "codename": "change_site"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 85,
+    "fields": {
+      "name": "Can delete site",
+      "content_type": 21,
+      "codename": "delete_site"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 86,
+    "fields": {
+      "name": "Can view site",
+      "content_type": 21,
+      "codename": "view_site"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 87,
+    "fields": {
+      "name": "Can add email address",
+      "content_type": 22,
+      "codename": "add_emailaddress"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 88,
+    "fields": {
+      "name": "Can change email address",
+      "content_type": 22,
+      "codename": "change_emailaddress"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 89,
+    "fields": {
+      "name": "Can delete email address",
+      "content_type": 22,
+      "codename": "delete_emailaddress"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 90,
+    "fields": {
+      "name": "Can view email address",
+      "content_type": 22,
+      "codename": "view_emailaddress"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 91,
+    "fields": {
+      "name": "Can add email confirmation",
+      "content_type": 23,
+      "codename": "add_emailconfirmation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 92,
+    "fields": {
+      "name": "Can change email confirmation",
+      "content_type": 23,
+      "codename": "change_emailconfirmation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 93,
+    "fields": {
+      "name": "Can delete email confirmation",
+      "content_type": 23,
+      "codename": "delete_emailconfirmation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 94,
+    "fields": {
+      "name": "Can view email confirmation",
+      "content_type": 23,
+      "codename": "view_emailconfirmation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 95,
+    "fields": {
+      "name": "Can add social account",
+      "content_type": 24,
+      "codename": "add_socialaccount"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 96,
+    "fields": {
+      "name": "Can change social account",
+      "content_type": 24,
+      "codename": "change_socialaccount"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 97,
+    "fields": {
+      "name": "Can delete social account",
+      "content_type": 24,
+      "codename": "delete_socialaccount"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 98,
+    "fields": {
+      "name": "Can view social account",
+      "content_type": 24,
+      "codename": "view_socialaccount"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 99,
+    "fields": {
+      "name": "Can add social application",
+      "content_type": 25,
+      "codename": "add_socialapp"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 100,
+    "fields": {
+      "name": "Can change social application",
+      "content_type": 25,
+      "codename": "change_socialapp"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 101,
+    "fields": {
+      "name": "Can delete social application",
+      "content_type": 25,
+      "codename": "delete_socialapp"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 102,
+    "fields": {
+      "name": "Can view social application",
+      "content_type": 25,
+      "codename": "view_socialapp"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 103,
+    "fields": {
+      "name": "Can add social application token",
+      "content_type": 26,
+      "codename": "add_socialtoken"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 104,
+    "fields": {
+      "name": "Can change social application token",
+      "content_type": 26,
+      "codename": "change_socialtoken"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 105,
+    "fields": {
+      "name": "Can delete social application token",
+      "content_type": 26,
+      "codename": "delete_socialtoken"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 106,
+    "fields": {
+      "name": "Can view social application token",
+      "content_type": 26,
+      "codename": "view_socialtoken"
     }
   },
   {
@@ -482,7 +1258,7 @@
     "pk": 6,
     "fields": {
       "app_label": "app",
-      "model": "category"
+      "model": "customuser"
     }
   },
   {
@@ -490,7 +1266,7 @@
     "pk": 7,
     "fields": {
       "app_label": "app",
-      "model": "product"
+      "model": "category"
     }
   },
   {
@@ -498,7 +1274,7 @@
     "pk": 8,
     "fields": {
       "app_label": "app",
-      "model": "productoption"
+      "model": "client"
     }
   },
   {
@@ -506,7 +1282,7 @@
     "pk": 9,
     "fields": {
       "app_label": "app",
-      "model": "productimage"
+      "model": "customer"
     }
   },
   {
@@ -514,32 +1290,160 @@
     "pk": 10,
     "fields": {
       "app_label": "app",
-      "model": "customuser"
+      "model": "faq"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "app",
+      "model": "feedback"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "app",
+      "model": "order"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+      "app_label": "app",
+      "model": "product"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+      "app_label": "app",
+      "model": "projectsgallery"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+      "app_label": "app",
+      "model": "productoption"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 16,
+    "fields": {
+      "app_label": "app",
+      "model": "productimage"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 17,
+    "fields": {
+      "app_label": "app",
+      "model": "orderproduct"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 18,
+    "fields": {
+      "app_label": "app",
+      "model": "comment"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 19,
+    "fields": {
+      "app_label": "app",
+      "model": "messagetelegram"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 20,
+    "fields": {
+      "app_label": "constance",
+      "model": "constance"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 21,
+    "fields": {
+      "app_label": "sites",
+      "model": "site"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 22,
+    "fields": {
+      "app_label": "account",
+      "model": "emailaddress"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 23,
+    "fields": {
+      "app_label": "account",
+      "model": "emailconfirmation"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 24,
+    "fields": {
+      "app_label": "socialaccount",
+      "model": "socialaccount"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 25,
+    "fields": {
+      "app_label": "socialaccount",
+      "model": "socialapp"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 26,
+    "fields": {
+      "app_label": "socialaccount",
+      "model": "socialtoken"
     }
   },
   {
     "model": "sessions.session",
-    "pk": "6ltb0lu5ztjo9hzl8y74nst6m9cfvkks",
+    "pk": "bwb9dkq0ipnj89ub9v41g4a58u95oiqz",
     "fields": {
-      "session_data": ".eJxVjDsOwyAQRO9CHSG-xqRM7zOgXViCkwgkY1dR7h5bcpF0o3lv5s0CbGsJW6clzIldmWSX3w4hPqkeID2g3huPra7LjPxQ-Ek7n1qi1-10_w4K9LKvM40mGRNHdFqBAvDWZiv2HHHQDgX65Eh6pwGMjUApa6EUahpQSfLs8wXySzhQ:1qXRxM:XsUHRgDqKaudVhIYR70AGkiv5fJ-pXxAjglGzH3bWwM",
-      "expire_date": "2023-09-02T19:49:56.292Z"
+      "session_data": ".eJxVjDsOgzAQRO-ydWTZxj8o0-cM1nq9DiQRSGAqxN0DEg3NFPPezAaEc4Vu2x8Qca19XBee45ChAwW3LiF9eTxB_uD4ngRNY52HJE5FXHQRrynz73m5t4Mel_5YYyDns2sVSU6qFKN1g-WIYLn1ij17q7QvLhfyWkkZGoM2sZHsEmGG_Q8n3ztI:1qgieb:W37FZXt-dqTDCr4UL5lZBe9eEaDT2BFAGBIBlnC1BQE",
+      "expire_date": "2023-10-12T09:28:53.661Z"
     }
   },
   {
     "model": "app.customuser",
     "pk": 1,
     "fields": {
-      "password": "pbkdf2_sha256$600000$YieeJL8PzaRh9rvkP1jnyW$u4dSp4Z4V3Koc+DNH/v6rNmdhdm1/BS9jHTMMOO6jNw=",
-      "last_login": "2023-08-19T19:49:56.287Z",
+      "password": "pbkdf2_sha256$600000$3H42bhWHLFb8SpNKHyp11P$KhmNBgrprEiXNQ0UJJv8SiEnanWwlG1wb1xSb7+r2pA=",
+      "last_login": "2023-09-14T09:28:53.601Z",
       "is_superuser": true,
-      "username": "admin",
       "first_name": "",
       "last_name": "",
-      "email": "",
       "is_staff": true,
       "is_active": true,
-      "date_joined": "2023-08-19T19:49:45.581Z",
+      "date_joined": "2023-09-14T09:28:44.165Z",
+      "username": null,
       "phone_number": "",
+      "email": "admin@gmail.com",
       "groups": [],
       "user_permissions": []
     }
@@ -549,7 +1453,9 @@
     "pk": 1,
     "fields": {
       "name": "На пластиковые окна",
-      "slug": "na-plastikovye-okna"
+      "slug": "na-plastikovye-okna",
+      "show_on_homepage": false,
+      "show_as_bestseller": false
     }
   },
   {
@@ -557,7 +1463,9 @@
     "pk": 2,
     "fields": {
       "name": "Руллонные",
-      "slug": "rullonnye"
+      "slug": "rullonnye",
+      "show_on_homepage": true,
+      "show_as_bestseller": true
     }
   },
   {
@@ -565,7 +1473,9 @@
     "pk": 3,
     "fields": {
       "name": "Вертикальные",
-      "slug": "vertikalnye"
+      "slug": "vertikalnye",
+      "show_on_homepage": false,
+      "show_as_bestseller": false
     }
   },
   {
@@ -573,7 +1483,9 @@
     "pk": 4,
     "fields": {
       "name": "День-Ночь",
-      "slug": "den-noch"
+      "slug": "den-noch",
+      "show_on_homepage": false,
+      "show_as_bestseller": false
     }
   },
   {
@@ -581,7 +1493,9 @@
     "pk": 5,
     "fields": {
       "name": "Плиссе",
-      "slug": "plisse"
+      "slug": "plisse",
+      "show_on_homepage": false,
+      "show_as_bestseller": false
     }
   },
   {
@@ -589,7 +1503,271 @@
     "pk": 6,
     "fields": {
       "name": "Шторы",
-      "slug": "shtory"
+      "slug": "shtory",
+      "show_on_homepage": false,
+      "show_as_bestseller": false
+    }
+  },
+  {
+    "model": "app.product",
+    "pk": 1,
+    "fields": {
+      "name": "Товар для Рулонных штор",
+      "width": "5 мм",
+      "height": "5 мм",
+      "is_left_control": false,
+      "is_right_control": true,
+      "quantity": 3,
+      "cornice_type": "Пластиковый",
+      "control_type": "Ручной",
+      "manufacturer_country": "Китай",
+      "fabric_type": "Синтетика",
+      "property": "Пластик",
+      "dimming": 25,
+      "price": 30,
+      "description": "Описание для данного продукта",
+      "category": 2,
+      "slug": "tovar-dlya-rulonnyh-shtor",
+      "created_at": "2023-09-14T09:37:01.897Z",
+      "color": "Серый",
+      "discount": null
+    }
+  },
+  {
+    "model": "app.productoption",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "option_main": "ф",
+      "option_additional": "ф"
+    }
+  },
+  {
+    "model": "app.productimage",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "photo": "photos/products/r7SfZEDtbfle87ekXXO0mtcsPkPo1G3MkCLdacaHLjDUfwMwFaME5z0ruRrGdkm5.jpeg"
+    }
+  },
+  {
+    "model": "app.productimage",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "photo": "photos/products/Баннер_лето.png"
+    }
+  },
+  {
+    "model": "app.projectsgallery",
+    "pk": 1,
+    "fields": {
+      "title": "Очень крутые шторы",
+      "subtitle": "Супер крутые шторы",
+      "photo": "gallery/projects/photo_2023-09-12_11-07-21.jpg"
+    }
+  },
+  {
+    "model": "app.comment",
+    "pk": 1,
+    "fields": {
+      "author": 1,
+      "product": 1,
+      "body": "dfg"
+    }
+  },
+  {
+    "model": "app.customer",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "phone_number": "",
+      "mounting_type": "",
+      "address": "",
+      "comment": "",
+      "delivery_type": "",
+      "delivery_option": ""
+    }
+  },
+  {
+    "model": "app.order",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "created_at": "2023-09-14T09:30:29.836Z",
+      "is_completed": false
+    }
+  },
+  {
+    "model": "app.orderproduct",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "order": 1,
+      "quantity": 2,
+      "added_at": "2023-09-14T09:51:38.032Z"
+    }
+  },
+  {
+    "model": "app.feedback",
+    "pk": 1,
+    "fields": {
+      "body": "Отзыв 1",
+      "feedback_author": "Автор 1",
+      "author_company": "Компания 1",
+      "avatar": "feedback/author/review.png"
+    }
+  },
+  {
+    "model": "app.feedback",
+    "pk": 2,
+    "fields": {
+      "body": "Отзыв 2",
+      "feedback_author": "Автор 2",
+      "author_company": "Компания 2",
+      "avatar": "feedback/author/review_M97Li0E.png"
+    }
+  },
+  {
+    "model": "app.feedback",
+    "pk": 3,
+    "fields": {
+      "body": "Отзыв 3",
+      "feedback_author": "Автор 3",
+      "author_company": "Компания 3",
+      "avatar": "feedback/author/review_hq5Psqr.png"
+    }
+  },
+  {
+    "model": "app.faq",
+    "pk": 1,
+    "fields": {
+      "youtube_video_url": "https://youtu.be/ZZjQTr_adHs?si=MdcdyfEyRYzsWgL3"
+    }
+  },
+  {
+    "model": "app.faq",
+    "pk": 2,
+    "fields": {
+      "youtube_video_url": "https://youtu.be/ZZjQTr_adHs?si=MdcdyfEyRYzsWgL3"
+    }
+  },
+  {
+    "model": "app.faq",
+    "pk": 3,
+    "fields": {
+      "youtube_video_url": "https://youtu.be/ZZjQTr_adHs?si=MdcdyfEyRYzsWgL3"
+    }
+  },
+  {
+    "model": "app.messagetelegram",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "order": null,
+      "product_msg": "\nШирина: 3 мм\nДлина: 6 мм\nУправление: Слева\nКол-во: 18\nТип карниза: Алюминевый\nТип управления: С электроприводом\n",
+      "basket_msg": null
+    }
+  },
+  {
+    "model": "app.messagetelegram",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "order": null,
+      "product_msg": null,
+      "basket_msg": null
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 1,
+    "fields": {
+      "key": "constance:core:EMAIL",
+      "value": "gAJYDQAAAGluZm9AY29tYm8udXpxAC4="
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 2,
+    "fields": {
+      "key": "constance:core:PHONE_NUMBER",
+      "value": "gAJYFwAAACs5OTggKDk1KSAxNDIgLSAzMyAtIDEzcQAu"
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 3,
+    "fields": {
+      "key": "constance:core:HOMEPAGE_HERO_TITLE",
+      "value": "gAJYPgAAANCb0YPRh9GI0LjQtSDRiNGC0L7RgNGLINC90LAg0YDRi9C90LrQtSDQo9C30LHQtdC60LjRgdGC0LDQvdCwcQAu"
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 4,
+    "fields": {
+      "key": "constance:core:HOMEPAGE_HERO_DESCRIPTION",
+      "value": "gAJYfQAAANCb0YPRh9GI0LjQtSDRiNGC0L7RgNGLINC90LAg0YDRi9C90LrQtSDQo9C30LHQtdC60LjRgdGC0LDQvdCwCtCb0YPRh9GI0LjQtSDRiNGC0L7RgNGLINC90LAg0YDRi9C90LrQtSDQo9C30LHQtdC60LjRgdGC0LDQvdCwcQAu"
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 5,
+    "fields": {
+      "key": "constance:core:CALLING_TIME",
+      "value": "gAJYEgAAANGBIDg6MDAg0LTQviAyMDowMHEALg=="
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 6,
+    "fields": {
+      "key": "constance:core:OFFICE_ADDRESS",
+      "value": "gAJYTAAAANCzLtCi0LDRiNC60LXQvdGCLCDQkNC70LzQsNC30LDRgNGB0LrQuNC5INGA0LDQudC+0L0sINGD0Lsu0KHQsNCz0LHQsNC9IDM3LzFxAC4="
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 7,
+    "fields": {
+      "key": "constance:core:WORKING_TIME",
+      "value": "gAJYEgAAANGBIDk6MDAg0LTQviAxOTowMHEALg=="
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 8,
+    "fields": {
+      "key": "constance:core:INSTAGRAM_LINK",
+      "value": "gAJYAAAAAHEALg=="
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 9,
+    "fields": {
+      "key": "constance:core:FACEBOOK_LINK",
+      "value": "gAJYAAAAAHEALg=="
+    }
+  },
+  {
+    "model": "constance.constance",
+    "pk": 10,
+    "fields": {
+      "key": "constance:core:TELEGRAM_LINK",
+      "value": "gAJYAAAAAHEALg=="
+    }
+  },
+  {
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+      "domain": "example.com",
+      "name": "example.com"
     }
   }
 ]

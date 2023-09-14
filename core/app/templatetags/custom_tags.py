@@ -2,7 +2,7 @@ from django import template
 
 from app.models import Category, Product
 from app.cart_utils import get_cart_data
-
+from helpers import functions as func
 register = template.Library()
 
 
@@ -54,14 +54,6 @@ def get_unique_elements(sort_field):
 
 
 @register.simple_tag()
-def convert_price(product: Product):
-    import requests
-
-    API_KEY = "0a1fb85a88eafb2934c0bae7"
-
-    url = f"https://v6.exchangerate-api.com/v6/{API_KEY}/latest/USD"
-    resp = requests.get(url).json()
-
-    uzs = resp["conversion_rates"]["UZS"]
-    price = f"{round(product.price * uzs):,d}".replace(",", " ")
+def convert_price(product_price):
+    price = func.convert_price(product_price)
     return price
