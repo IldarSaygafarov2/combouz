@@ -4,7 +4,7 @@ from django.templatetags.static import static
 from django.urls import reverse
 
 from .managers import CustomUserManager
-from helpers.functions import convert_price
+from helpers.functions import convert_price, format_price
 
 
 class CustomUser(AbstractUser):
@@ -103,7 +103,9 @@ class Product(models.Model):
     fabric_type = models.CharField(verbose_name="Тип ткани", max_length=150)
     property = models.CharField(verbose_name="Свойство", max_length=100)
     dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
-    price = models.SmallIntegerField(verbose_name="Цена", default=0)
+    price = models.SmallIntegerField(verbose_name="Цена у.е", default=0)
+    converted_price = models.IntegerField(verbose_name="Цена в долларах", blank=True, null=True, 
+        help_text="Данное поле заполнять не нужно, при вводе цены в долларах и сохранении продукта, цена будет добавлена сама")
     description = models.TextField(verbose_name="Описание продукта")
     category = models.ForeignKey(
         Category,
@@ -119,6 +121,10 @@ class Product(models.Model):
     )
     color = models.CharField(verbose_name="Цвет", max_length=100, default="")
     discount = models.IntegerField(verbose_name="Размер скидки", blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.converted_price = convert_price(self.price)
+        super(Product, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"product_slug": self.slug})
@@ -201,6 +207,7 @@ class Comment(models.Model):
         Product, on_delete=models.CASCADE, related_name="comments"
     )
     body = models.TextField(verbose_name="Текст комментария")
+    img = models.ImageField(verbose_name="Фото",  upload_to="comments/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.author}: {self.product}"
@@ -235,7 +242,7 @@ class Order(models.Model):
     def get_cart_total_price(self):
         order_products = self.orderproduct_set.all()
         total = sum([item.get_total_price for item in order_products])
-        return convert_price(total)
+        return format_price(total)
 
     @property
     def get_cart_total_quantity(self):
@@ -253,7 +260,7 @@ class OrderProduct(models.Model):
 
     @property
     def get_total_price(self):
-        return int(self.product.price) * self.quantity
+        return int(self.product.converted_price) * self.quantity
 
 
 class Feedback(models.Model):

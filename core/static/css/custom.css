@@ -1,3 +1,7 @@
 .single-comments__fullname {
     margin-left: 0;
 }
+
+.single-comments__item:not(:last-child) {
+    margin-bottom: 40px;
+}

@@ -55,5 +55,5 @@ def get_unique_elements(sort_field):
 
 @register.simple_tag()
 def convert_price(product_price):
-    price = func.convert_price(product_price)
+    price = func.format_price(product_price)
     return price

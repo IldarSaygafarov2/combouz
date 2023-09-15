@@ -53,7 +53,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ["body"]
+        fields = ["body", "img"]
         widgets = {
             "body": forms.Textarea(attrs={
                 "class": "single-comments__textarea",

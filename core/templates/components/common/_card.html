@@ -1,6 +1,6 @@
 {% load static custom_tags %}
 
-{% convert_price product.price as product_price %}
+{% convert_price product.converted_price as product_price %}
 
 <div class="roll-curtains__card">
   <a class="roll-curtains__img" href="{{ product.get_absolute_url }}">

@@ -16,7 +16,7 @@
         </div>
         <div class="busket-top__items">
             {% for cart_product in products %}
-                {% convert_price cart_product.product.price as product_price %}
+                {% convert_price cart_product.product.converted_price as product_price %}
                 <div class="busket-top__elem">
                     <p class="busket-top__name">{{ cart_product.product.name }}</p>
                     <div class="busket-top__controls">

@@ -28,21 +28,27 @@ CORNICE_TYPES = {"aluminium": "Алюминевый", "plastic": "Пластик
 
 CONTROL_TYPES = {"manual": "Ручной", "electro": "С электроприводом"}
 
+ITEM_CONTROLS = {
+    "left": "Слева",
+    "right": "Справа",
+}
 
-def __make_product_variant_msg(product_data, product_name):
+def __make_product_variant_msg(product_data, product_name=""):
     if not product_data:
         return
 
-    print(product_data.values())
+    item_control = product_data.get('item-control')
+    item_cornice_type = product_data.get('item-cornice-type')
+    item_control_type = product_data.get('item-control-type')
 
     return f"""
 Название продукта: {product_name}
 Ширина: {product_data['item-width']}
 Длина: {product_data['item-length']}
-Управление: {'Слева' if product_data['item-control'] == 'left' else 'Справа'}
+Управление: {ITEM_CONTROLS[item_control] if item_control else '-'}
 Кол-во: {product_data['item-count']}
-Тип карниза: {CORNICE_TYPES[product_data['item-cornice-type']]}
-Тип управления: {CONTROL_TYPES[product_data['item-control-type']]}
+Тип карниза: {CORNICE_TYPES[item_cornice_type] if item_cornice_type else '-'}
+Тип управления: {CONTROL_TYPES[item_control_type] if item_control_type else '-'}
 """
 
 
@@ -106,7 +112,6 @@ def user_registration(request):
         user.username = form.cleaned_data["email"].split("@")[0]
         user.save()
         return redirect("home")
-
     return redirect("home")
 
 
@@ -148,13 +153,10 @@ def sort_products(request, queryset):
 def category_detail_view(request, slug):
     category = Category.objects.get(slug=slug)
     qs = Product.objects.filter(category=category)
-
     category_products = sort_products(request, qs)
-
     paginator = Paginator(category_products, 2)
     page = request.GET.get("page")
     products = paginator.get_page(page)
-
     context = {"products": products}
     return render(request, "app/categories.html", context)
 
@@ -187,6 +189,7 @@ def to_cart(request, product_id, action):
     product = Product.objects.get(pk=product_id)
     product_msg = __make_product_variant_msg(request.POST)
 
+
     obj = MessageTelegram.objects.create(product=product, product_msg=product_msg)
     obj.save()
 
@@ -209,12 +212,12 @@ def basket_view(request):
                 message_tg = MessageTelegram.objects.filter(product_id=product.pk)
             else:
                 message_tg = MessageTelegram.objects.filter(product_id=product["pk"])
-
-            basket_msg += ''.join([
-                message_tg_obj.product_msg
-                for message_tg_obj in message_tg
-                if message_tg_obj.product_msg
-            ])
+            # basket_msg += ''.join([
+            #     message_tg_obj.product_msg
+            #     for message_tg_obj in message_tg
+            #     if message_tg_obj.product_msg
+            # ])
+            # print(basket_msg)
             req.post(
                 settings.CHANNEL_API_LINK.format(
                     token=settings.BOT_TOKEN,
@@ -223,8 +226,9 @@ def basket_view(request):
                 )
             )
 
-    category = cart_info['products'].last().product.category
-    last_product = cart_info['products'].last().product
+    category = cart_info['products'].last()
+    category = category.product.category if category else None
+    last_product = cart_info['products'].last().product if category else None
     context = {
         "cart_total_quantity": cart_info["cart_total_quantity"],
         "cart_total_price": cart_info["cart_total_price"],
@@ -243,7 +247,9 @@ def send_phone_number_to_telegram(request):
 """
     req.post(
         settings.CHANNEL_API_LINK.format(
-            token=settings.BOT_TOKEN, channel_id=settings.CHANNEL_ID, text=msg
+            token=settings.BOT_TOKEN, 
+            channel_id=settings.CHANNEL_ID, 
+            text=msg
         )
     )
 
