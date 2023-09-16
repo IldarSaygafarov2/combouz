@@ -1,18 +1,21 @@
 {% load static %}
 
-
 <section class="single-comments">
     <h3 class="single-comments__title">Комментарии</h3>
     {% if request.user.is_authenticated %}
         <div class="single-comments__content">
-            <form class="single-comments__form" action="{% url 'add_comment' product.slug %}" method="post" enctype="multipart/form-data">
+            <form class="single-comments__form" action="" method="post"
+                  enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="single-comments__user">
                     <strong class="single-comments__fullname">{{ request.user.email }}</strong>
                 </div>
-                {{ form.body }}
+                <textarea name="body" cols="" rows="" class="single-comments__textarea"
+                          placeholder="Оставьте комментарий" required="" id="id_body"></textarea>
+
                 <p style="margin: 15px 0;">Прикрепите фотографию нашей работы</p>
-                {{ form.img }}
+
+                <input type="file" name="img" multiple="" accept="image/*" id="id_img">
                 <button class="single-comments__btn darkBlueHover">Отправить</button>
             </form>
             <div class="single-comments__block">
@@ -22,10 +25,24 @@
                             <strong class="single-comments__fullname">{{ comment.author.email }}</strong>
                         </div>
                         <p class="single-comments__descr">{{ comment.body }}</p>
+
+
+                        <div class="single-comments__photos">
+                            {% for comment_item in comment.commentitem_set.all %}
+                                <div class="single-comments__photo">
+                                    <img src="{{ comment_item.img.url }}" alt="">
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
-            <a class="single-comments__loadmore" href="#!">Загрузить еще</a></div>
+{#            {{  }}#}
+            {% if comments|length < comments_total %}
+                <a class="single-comments__loadmore" href="?next={{ comments|length }}">Загрузить еще</a>
+            {% endif %}
+        </div>
+
     {% else %}
         <p>Только зарегистрированные пользователи могут оставлять комментарии</p>
     {% endif %}

@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "app.apps.AppConfig",
 
-    "debug_toolbar",
     'django_dump_load_utf8',
     "constance",
     "django.contrib.sites",
@@ -39,7 +38,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -304,3 +303,6 @@ JAZZMIN_SETTINGS = {
     # Add a language dropdown into the admin
     "language_chooser": False,
 }
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='http'

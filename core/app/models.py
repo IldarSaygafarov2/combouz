@@ -10,7 +10,7 @@ from helpers.functions import convert_price, format_price
 class CustomUser(AbstractUser):
     username = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(verbose_name="Номер телефона", max_length=15)
-    email = models.EmailField(unique=True, default="")
+    email = models.EmailField(unique=False, default="")
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -104,8 +104,12 @@ class Product(models.Model):
     property = models.CharField(verbose_name="Свойство", max_length=100)
     dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
     price = models.SmallIntegerField(verbose_name="Цена у.е", default=0)
-    converted_price = models.IntegerField(verbose_name="Цена в долларах", blank=True, null=True, 
-        help_text="Данное поле заполнять не нужно, при вводе цены в долларах и сохранении продукта, цена будет добавлена сама")
+    converted_price = models.IntegerField(
+        verbose_name="Цена в долларах",
+        blank=True,
+        null=True,
+        help_text="Данное поле заполнять не нужно, при вводе цены в долларах и сохранении продукта, цена будет добавлена сама",
+    )
     description = models.TextField(verbose_name="Описание продукта")
     category = models.ForeignKey(
         Category,
@@ -207,10 +211,17 @@ class Comment(models.Model):
         Product, on_delete=models.CASCADE, related_name="comments"
     )
     body = models.TextField(verbose_name="Текст комментария")
-    img = models.ImageField(verbose_name="Фото",  upload_to="comments/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.author}: {self.product}"
+
+
+class CommentItem(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    img = models.ImageField(
+        verbose_name="Фото", upload_to="comments/", blank=True, null=True
+    )
 
 
 class Customer(models.Model):
@@ -226,7 +237,9 @@ class Customer(models.Model):
     comment = models.CharField(verbose_name="Комментарий", max_length=1000, default="")
     delivery_type = models.CharField(verbose_name="Тип доставки", max_length=150)
     delivery_option = models.CharField(
-        verbose_name="Вариант доставки", max_length=150, default=""
+        verbose_name="Вариант доставки",
+        max_length=150,
+        default="",
     )
 
     def __str__(self):

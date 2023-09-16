@@ -1,12 +1,12 @@
 {% if best_sellers_category %}
-<section class="cassette-combo" style="margin-top: 61px;">
-  <div class="container">
-    <h2 class="cassette-combo__title">{{ best_sellers_category }}</h2>
-    <div class="cassette-combo__cards">
-      {% for product in best_sellers_category.categories.all %}
-        {% include 'components/common/_card-v2.html' %}
-      {% endfor %}
+  <section class="cassette-combo" style="margin-top: 61px;">
+    <div class="container">
+      <h2 class="cassette-combo__title">{{ best_sellers_category }}</h2>
+      <div class="cassette-combo__cards">
+        {% for product in best_sellers_category.categories.all %}
+          {% include 'components/common/_card-v2.html' %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endif %}

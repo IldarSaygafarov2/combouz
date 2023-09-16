@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 
 from core import settings
 from .cart_utils import CartForAnonymousUser, CartForAuthenticatedUser, get_cart_data
-from .forms import CommentForm, CustomUserAuthenticationForm, CustomUserCreationForm
+from .forms import CustomUserAuthenticationForm, CustomUserCreationForm
 from .models import (
     FAQ,
     Category,
@@ -13,7 +13,7 @@ from .models import (
     Feedback,
     MessageTelegram,
     Product,
-    ProjectsGallery,
+    ProjectsGallery, Comment, CommentItem,
 )
 
 DELIVERY_TYPES = {
@@ -32,6 +32,7 @@ ITEM_CONTROLS = {
     "left": "Слева",
     "right": "Справа",
 }
+
 
 def __make_product_variant_msg(product_data, product_name=""):
     if not product_data:
@@ -161,26 +162,45 @@ def category_detail_view(request, slug):
     return render(request, "app/categories.html", context)
 
 
-def add_comment(request, product_slug):
-    product = Product.objects.get(slug=product_slug)
-
-    form = CommentForm(data=request.POST)
-    if form.is_valid():
-        form = form.save(commit=False)
-        form.author = request.user
-        form.product = product
-        form.save()
-        return redirect("product_detail", product_slug)
-
-
 def product_view(request, product_slug):
     product = Product.objects.get(slug=product_slug)
-    comments = product.comments.all()
+
+    sort = request.GET.get('sort')
+
+    if sort:
+        return redirect(f"/categories/{product.category.slug}/?sort={sort}")
+
+    next_num = request.GET.get('next')
+    comments_total = product.comments.count()
+    comments = product.comments.all()[0:2]
+
+    if next_num:
+        next_num = int(next_num)
+        comments = product.comments.all()[:next_num + next_num]
+
+    if request.method == "POST":
+        data = request.POST
+        images = request.FILES.getlist('img')
+
+        comment = Comment.objects.create(
+            author=request.user,
+            product=product,
+            body=data['body']
+        )
+        comment.save()
+
+        for image in images:
+            comment_item = CommentItem.objects.create(
+                comment=comment,
+                img=image
+            )
+            comment_item.save()
+        return redirect("product_detail", product_slug=product_slug)
 
     context = {
         "product": product,
-        "form": CommentForm(),
         "comments": comments,
+        "comments_total": comments_total
     }
     return render(request, "app/product.html", context)
 
@@ -188,7 +208,6 @@ def product_view(request, product_slug):
 def to_cart(request, product_id, action):
     product = Product.objects.get(pk=product_id)
     product_msg = __make_product_variant_msg(request.POST)
-
 
     obj = MessageTelegram.objects.create(product=product, product_msg=product_msg)
     obj.save()
@@ -209,15 +228,17 @@ def basket_view(request):
 
         for product in cart_info["products"]:
             if request.user.is_authenticated:
-                message_tg = MessageTelegram.objects.filter(product_id=product.pk)
+                message_tg = MessageTelegram.objects.filter(product_id=product.product.pk)
             else:
                 message_tg = MessageTelegram.objects.filter(product_id=product["pk"])
-            # basket_msg += ''.join([
-            #     message_tg_obj.product_msg
-            #     for message_tg_obj in message_tg
-            #     if message_tg_obj.product_msg
-            # ])
-            # print(basket_msg)
+
+            basket_msg += ''.join([
+                message_tg_obj.product_msg
+                for message_tg_obj in message_tg
+                if message_tg_obj.product_msg
+            ])
+
+            basket_msg += f"Продукт: {product.product.name}"
             req.post(
                 settings.CHANNEL_API_LINK.format(
                     token=settings.BOT_TOKEN,
@@ -242,13 +263,11 @@ def basket_view(request):
 
 def send_phone_number_to_telegram(request):
     phone_number = request.POST.get("phone_number")
-    msg = f"""
-Оставленный номер телефона: {phone_number}
-"""
+    msg = f"Оставленный номер телефона: {phone_number}"
     req.post(
         settings.CHANNEL_API_LINK.format(
-            token=settings.BOT_TOKEN, 
-            channel_id=settings.CHANNEL_ID, 
+            token=settings.BOT_TOKEN,
+            channel_id=settings.CHANNEL_ID,
             text=msg
         )
     )

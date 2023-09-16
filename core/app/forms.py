@@ -50,18 +50,21 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ("email", "phone_number", "password1", "password2")
 
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ["body", "img"]
-        widgets = {
-            "body": forms.Textarea(attrs={
-                "class": "single-comments__textarea",
-                "placeholder": "Оставьте комментарий",
-                "rows": "",
-                "cols": ""
-            })
-        }
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = ["body", "img"]
+#         widgets = {
+#             "body": forms.Textarea(attrs={
+#                 "class": "single-comments__textarea",
+#                 "placeholder": "Оставьте комментарий",
+#                 "rows": "",
+#                 "cols": ""
+#             }),
+#             "img": forms.FileInput(attrs={
+#                 "multiple": ""
+#             })
+#         }
 
 
 class OrderForm(forms.ModelForm):
