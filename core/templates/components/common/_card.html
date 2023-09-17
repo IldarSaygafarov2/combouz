@@ -4,7 +4,7 @@
 
 <div class="roll-curtains__card">
   <a class="roll-curtains__img" href="{{ product.get_absolute_url }}">
-    <img src="{% static 'images/main-page/roll-curtains.png' %}" alt="{{ product.name }} Combo.uz" />
+    <img src="{{ product.get_first_photo }}" alt="{{ product.name }} Combo.uz" />
     {% if product.discount %}
       <span class="roll-curtains__discount-abs">СКИДКА 15%</span>
     {% endif %}
