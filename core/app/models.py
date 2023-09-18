@@ -32,6 +32,7 @@ class Category(models.Model):
     show_on_homepage = models.BooleanField(
         verbose_name="Показывать на главной странице",
         default=False,
+        help_text="При выборе, добавит все товары данной категории на главную страницу.",
     )
     show_as_bestseller = models.BooleanField(
         verbose_name="Сделать самым продоваемым",
@@ -87,11 +88,13 @@ class Product(models.Model):
     )
     quantity = models.IntegerField(verbose_name="Количество", choices=QUANTITY_CHOICES)
     cornice_type = models.CharField(
+        verbose_name="Тип карниза",
         blank=True,
         choices=CORNICE_TYPE_CHOICES,
         max_length=50,
     )
     control_type = models.CharField(
+        verbose_name="Тип управления",
         blank=True,
         choices=CONTROL_TYPE_CHOICES,
         max_length=50,
@@ -105,7 +108,7 @@ class Product(models.Model):
     dimming = models.SmallIntegerField(verbose_name="Затемнение", default=0)
     price = models.SmallIntegerField(verbose_name="Цена у.е", default=0)
     converted_price = models.IntegerField(
-        verbose_name="Цена в долларах",
+        verbose_name="Сконвертированная цена",
         blank=True,
         null=True,
         help_text="Данное поле заполнять не нужно, при вводе цены в долларах и сохранении продукта, цена будет добавлена сама",
@@ -113,6 +116,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name="Описание продукта")
     category = models.ForeignKey(
         Category,
+        verbose_name="Категория",
         on_delete=models.CASCADE,
         related_name="categories",
         default=None,
@@ -165,6 +169,10 @@ class ProductOption(models.Model):
     def __str__(self):
         return f"{self.product}: {self.option_main}"
 
+    class Meta:
+        verbose_name = "Характеристика"
+        verbose_name_plural = "Характеристики"
+
 
 class ProductImage(models.Model):
     def make_folder_path(self, filename):
@@ -174,6 +182,10 @@ class ProductImage(models.Model):
         Product, on_delete=models.CASCADE, related_name="images"
     )
     photo = models.ImageField(verbose_name="Фото", upload_to=make_folder_path)
+
+    class Meta:
+        verbose_name = "Фотография"
+        verbose_name_plural = "Фотографии"
 
 
 class ProjectsGallery(models.Model):
@@ -214,6 +226,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author}: {self.product}"
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
 
 
 class CommentItem(models.Model):
